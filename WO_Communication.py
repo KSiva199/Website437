@@ -1,6 +1,6 @@
 from baseObject import baseObject
 
-class users(baseObject):
+class WO_Communication(baseObject):
     def __init__(self):
         self.setup('korakus_users')
     def toList(self):

@@ -1,6 +1,6 @@
 from baseObject import baseObject
 
-class users(baseObject):
+class Users(baseObject):
     def __init__(self):
         self.setup('korakus_users')
     def toList(self):
