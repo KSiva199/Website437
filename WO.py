@@ -2,7 +2,7 @@ from baseObject import baseObject
 
 class WO(baseObject):
     def __init__(self):
-        self.setup('korakus_users')
+        self.setup('WORK ORDERS')
     def toList(self):
         l = []
         for row in self.data:
