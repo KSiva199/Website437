@@ -15,4 +15,3 @@ class Users(baseObject):
         self.data = []
         for row in self.cur:
             self.data.append(row) 
-        print("demo")
