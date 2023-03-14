@@ -3,12 +3,16 @@
 {% block content %}
             <div>
                 <form action="/users/manage?action=insert" method="POST">
-                    Name:<br>
-                    <input type="text" name="name" value="{{ obj.data[0].name }}" />
+                    First Name:<br>
+                    <input type="text" name="User FN" value="{{ obj.data[0].User FN }}" />
+                    <br>
+
+                    Last Name:<br>
+                    <input type="text" name="User LN" value="{{ obj.data[0].User LN }}" />
                     <br>
 
                     Email:<br>
-                    <input type="text" name="email" value="{{ obj.data[0].email }}" />
+                    <input type="text" name="User Username" value="{{ obj.data[0].User Username }}" />
                     <br>
 
                     Password:<br>
@@ -19,9 +23,20 @@
                     <input type="password" name="password" value="" />
                     <br>
 
+                    Phone Number:<br>
+                    <input type="text" name="Phone Number" value="{{ obj.data[0].Phone Number }}" />
+                    <br>
+
+                    Shop:<br>
+                    <input type="text" name="Shop" value="{{ obj.data[0].Shop }}" />
+                    <br>
+
                     Role:<br>
                     <input type="text" name="role" value="{{ obj.data[0].role }}" />
                     <br>
+
+                    Asset ID:<br>
+                    <input type="text" name="User Location/AssetID" value="{{ obj.data[0].User Location/AssetID }}" />
                     <br>
                     <input type="submit" value="Submit" />
                 </form>
