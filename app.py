@@ -1,9 +1,8 @@
 from flask import Flask
 from flask import render_template
 from flask import request,session, redirect, url_for, escape,send_from_directory,make_response 
-from flask_session import Session
+#from flask_session import Session
 from datetime import timedelta
-from user import user
 
 #create Flask app instance
 app = Flask(__name__,static_url_path='')
