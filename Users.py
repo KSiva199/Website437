@@ -6,7 +6,7 @@ class Users(baseObject):
     def toList(self):
         l = []
         for row in self.data:
-            s = f"{row['User FN']} {row['User LN']} {row['User Username']} {row['Phone Number']}  {row['Role']} {row['Shop']} {row['User Location/AssetID']} "  
+            s = f"{row['User FN']} {row['User LN']} {row['User Email']} {row['Phone Number']}{row['User Location']} "  
             l.append(s)
         return l
     def getByUsername(self,name): #field,value
