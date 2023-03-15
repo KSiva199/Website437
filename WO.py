@@ -6,7 +6,7 @@ class WO(baseObject):
     def toList(self):
         l = []
         for row in self.data:
-            s = f"{row['Request Date']} {row['Issue']} {row['Shop']} {row['Status']}  {row['Labor Hours']} {row['Solution Notes']} {row['REquester/UserID']} {row['ProblemID']} {row['AssetID']} {row['Assigned Tech/UserID']}"  
+            s = f"{row['Request Date']} {row['Issue']} {row['Shop']} {row['Status']}  {row['Labor Hours']} {row['Solution Notes']} {row['Requester']} {row['Problem Code']} {row['Asset']} {row['Assigned Tech']}"  
             l.append(s)
         return l
     def getByWOID(self,id): #field,value

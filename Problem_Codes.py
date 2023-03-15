@@ -6,6 +6,6 @@ class Problem_Codes(baseObject):
     def toList(self):
         l = []
         for row in self.data:
-            s = f"{row['Problem Description']} {row['Shop']}"  
+            s = f"{row['Problem Code']} {row['Problem Description']} {row['Shop']}"  
             l.append(s)
         return l
