@@ -19,45 +19,26 @@ sess.init_app(app)
 #Basic root route - show the word 'homepage'
 @app.route('/')  #route name
 def home(): #view function
-    return render_template('home.html')
+    return render_template('/users/home.html')
 
+@app.route('/register')
+def register():
+    return render_template('/users/add.html')
 
-@app.route('/users/manage',methods=['GET','POST'])
+@app.route('/manage_user',methods=['GET','POST'])
 def manage_user():
     o =Users()
-    action = request.args.get('action')
-    pkval = request.args.get('pkval')
-    if action is not None and action == 'insert':
-        d = {}
-        d['User FN'] = request.form.get('User FN')
-        d['User LN'] = request.form.get('User LN')
-        d['User Username'] = request.form.get('role')
-        d['Password'] = request.form.get('password')
-        d['Phone Number'] = request.form.get('Phone Number')
-        d['Role'] = request.form.get('Role')
-        d['Shop'] = request.form.get('Shop')
-        o.set(d)
-        o.insert()
-    if action is not None and action == 'update':
-        o.getById(pkval)
-        o.data[0]['User FN'] = request.form.get('User FN')
-        o.data[0]['User LN'] = request.form.get('User LN')
-        o.data[0]['User Username'] = request.form.get('User Username')
-        o.data[0]['password'] = request.form.get('password')
-        o.data[0]['Phone Number'] = request.form.get('Phone Number')
-        o.data[0]['Role'] = request.form.get('Role')
-        o.data[0]['Shop'] = request.form.get('Shop')
-        o.update()
-        
-    if pkval is None:
-        o.getAll()
-        return render_template('users/list.html',objs = o)
-    if pkval == 'new':
-        o.createBlank()
-        return render_template('users/add.html',obj = o)
-    else:
-        o.getById(pkval)
-        return render_template('users/manage.html',obj = o)
+    d = {}
+    d['User FN'] = request.form.get('User FN')
+    d['User LN'] = request.form.get('User LN')
+    d['User Username'] = request.form.get('User Username')
+    d['Password'] = request.form.get('password')
+    d['Phone Number'] = request.form.get('Phone Number')
+    d['Role'] = request.form.get('Role')
+    d['Shop'] = request.form.get('Shop')
+    o.set(d)
+    o.insert()
+    return render_template('/users/home.html')
 
   
 if __name__ == '__main__':

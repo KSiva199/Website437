@@ -2,40 +2,68 @@
 
 {% block content %}
             <div>
-                <form action="/users/manage?action=insert" method="POST">
+                <form method="POST" action="manage_user">
                     First Name:<br>
-                    <input type="text" name="User FN" value="{{ obj.data[0].User FN }}" />
+                    <input type="text" name="User FN" required/>
                     <br>
 
                     Last Name:<br>
-                    <input type="text" name="User LN" value="{{ obj.data[0].User LN }}" />
+                    <input type="text" name="User LN"  required/>
                     <br>
 
                     Email:<br>
-                    <input type="text" name="User Username" value="{{ obj.data[0].User Username }}" />
+                    <input type="text" name="User Username" required/>
                     <br>
 
                     Password:<br>
-                    <input type="password" name="password" value="" />
+                    <input type="password" class='password' name="password" required/>
                     <br>
 
                     Retype Password:<br>
-                    <input type="password" name="password" value="" />
+                    <input type="password" class='confirmpassword' name="confirmpassword" required/>
                     <br>
 
                     Phone Number:<br>
-                    <input type="text" name="Phone Number" value="{{ obj.data[0].Phone Number }}" />
+                    <input type="text" name="Phone Number"  required/>
                     <br>
 
                     Shop:<br>
-                    <input type="text" name="Shop" value="{{ obj.data[0].Shop }}" />
+                    <select name="Shop">
+                        <option value="Select Option">-Please choose an option-</option>
+                        <option value="Carpentry/Locksmith">Carpentry/Locksmith</option>
+                        <option value="Janitorial">Janitorial</option>
+                        <option value="Electrical">Electrical</option>
+                        <option value="HVAC">HVAC</option>
+                        <option value="Plumbing">Plumbing</option>
+                      </select>
                     <br>
 
                     Role:<br>
-                    <input type="text" name="role" value="{{ obj.data[0].role }}" />
+                    <select name="Role">
+                        <option value="Select Option">-Please choose an option-</option>
+                        <option value="Requester">Requester</option>
+                        <option value="Technician">Technician</option>
+                        <option value="Manager">Manager</option>
+                      </select>
                     <br>
-                    <input type="submit" value="Submit" />
+                    <br>
+                    <button class="'button" type="submit"> Sign In </button>
                 </form>
+                <script>
+                document.querySelector('.button').onclick=function(){
+                        var password=document.querySelector('.password').value,
+                            confirmpassword=document.querySelector('.confirmpassword').value;
+
+                            if(password==""){
+                                alert("Field cannot be empty.");
+                            }      
+                            else if(password!=confirmpassword){
+                                alert("Password didn't match. Try Again :)");
+                                return false
+                            }
+
+                }
+                </script>
                 
             </div>
 {% endblock %}

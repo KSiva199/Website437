@@ -8,6 +8,7 @@ class baseObject:
         self.cur = None
         self.fields = []
         self.pk = None
+        self.fk=None
         self.data = [] #data is a list of dictionaries representing rows in our table
         self.establishConnection()
         self.getFields()
@@ -23,6 +24,8 @@ class baseObject:
         for row in self.cur:
             if 'auto_increment' in row['Extra']:
                 self.pk = row['Field']
+            elif 'MUL' in row['Key']:
+                self.fk=row['Field']
             else:
                 self.fields.append(row['Field'])
     def createTable(self):
