@@ -11,11 +11,14 @@
     <h1> Clarkson Work Order System. </h1>
     <form method="POST" action="manage_user">
         Username:<br>
-        <input type="text" name="User FN" />
+        <input type="text" name="User Username" />
         <br>  
         Password:<br>
-        <input type="Password" name="User FN" />
+        <input type="Password" name="Password" />
+        <br>
+        <button type = "submit" id=submit formaction="{{url_for('login_user')}}">Login</button>  
     </form>
+    <br>
     <a href="{{url_for('register')}}">Don't have an account? Sign Up </a>
 
 

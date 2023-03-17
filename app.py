@@ -17,7 +17,7 @@ sess = Session()
 sess.init_app(app)
 
 #Basic root route - show the word 'homepage'
-@app.route('/')  #route name
+@app.route('/home')  #route name
 def home(): #view function
     return render_template('/users/home.html')
 
@@ -36,9 +36,24 @@ def manage_user():
     d['Phone Number'] = request.form.get('Phone Number')
     d['Role'] = request.form.get('Role')
     d['Shop'] = request.form.get('Shop')
-    o.set(d)
-    o.insert()
-    return render_template('/users/home.html')
+    o.getByUsername(request.form.get('User Username'))
+    if request.form.get('User Username')==o.data[0]['User Username']:
+        return "Email address already exist"
+    else: 
+        o.set(d)
+        o.insert()
+        return render_template('/users/home.html')
+
+@app.route('/login_user',methods=['GET','POST'])
+def login_user():
+    o=Users()
+    o.getByUsername(request.form.get('User Username'))
+    if (o.data[0]['User Username']==request.form.get('User Username')) and (o.data[0]['Password']==request.form.get('Password')) :
+        return render_template('/users/demo.html',user=o)
+    else: 
+        return render_template('/users/home.html')
+
+
 
   
 if __name__ == '__main__':
