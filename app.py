@@ -37,7 +37,7 @@ def manage_user():
     d['Role'] = request.form.get('Role')
     d['Shop'] = request.form.get('Shop')
     o.getByUsername(request.form.get('User Username'))
-    if request.form.get('User Username')==o.data[0]['User Username']:
+    if o.data[0]['User Username']==request.form.get('User Username'):
         return "Email address already exist"
     else: 
         o.set(d)
@@ -49,7 +49,7 @@ def login_user():
     o=Users()
     o.getByUsername(request.form.get('User Username'))
     if (o.data[0]['User Username']==request.form.get('User Username')) and (o.data[0]['Password']==request.form.get('Password')) :
-        return render_template('/users/demo.html',user=o)
+        return render_template('/users/requester_option.html',user=o)
     else: 
         return render_template('/users/home.html')
 

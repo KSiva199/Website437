@@ -14,4 +14,4 @@ class Users(baseObject):
         self.cur.execute(sql,(name))
         self.data = []
         for row in self.cur:
-            self.data.append(row) 
+            self.data.append(row)
