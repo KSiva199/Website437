@@ -4,7 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Home </title>
+    <title>Option Page</title>
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
 </head>
 
 <body>
@@ -14,7 +19,8 @@
     <a href="">Update Your Account</a><br>
     <a href="">Review Work Orders</a><br>
     <a href="">Add a Message to an Open Work Order</a><br><br>
-    <button type = "submit" id=logout formaction="{{url_for('home')}}">Logout</button>  
+    <a href="{{url_for('home')}}" class="btn btn-info btn-lg">
+    <span class="glyphicon glyphicon-log-out"></span> Log out </a>
    
 
 
