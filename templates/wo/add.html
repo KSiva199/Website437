@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+            <div>
+                <form method="POST" action="manage_user">
+                    First Name:<br>
+                    <input type="text" name="User FN" required/>
+                    <br>
+
+                    Last Name:<br>
+                    <input type="text" name="User LN"  required/>
+                    <br>
+
+                    Email:<br>
+                    <input type="text" name="User Username" required/>
+                    <br>
+
+                    Password:<br>
+                    <input type="password" class='password' name="password" onchange='check_pass();'/>
+                    <br>
+
+                    Retype Password:<br>
+                    <input type="password" class='confirmpassword' name="confirmpassword" onchange='check_pass();'/>
+                    <br>
+
+                    Phone Number:<br>
+                    <input type="text" name="Phone Number"  required/>
+                    <br>
+
+                    Shop:<br>
+                    <select name="Shop">
+                        <option value="Select Option">-Please choose an option-</option>
+                        <option value="Carpentry/Locksmith">Carpentry/Locksmith</option>
+                        <option value="Janitorial">Janitorial</option>
+                        <option value="Electrical">Electrical</option>
+                        <option value="HVAC">HVAC</option>
+                        <option value="Plumbing">Plumbing</option>
+                      </select>
+                    <br>
+
+                    Role:<br>
+                    <select name="Role">
+                        <option value="Select Option">-Please choose an option-</option>
+                        <option value="Requester">Requester</option>
+                        <option value="Technician">Technician</option>
+                        <option value="Manager">Manager</option>
+                      </select>
+                    <br>
+                    <br>
+                    <button type = "submit" onclick="matchPassword()">Submit</button>  
+  
+                    <!-- Click to reset fields -->  
+                    <button type = "reset" value = "Reset" >Reset</button>  
+                </form>
+                <script>
+                    function matchPassword() {  
+                        var pwd1 = document.querySelector('.password').value;
+                        var pwd2 = document.querySelector('.confirmpassword').value;
+                        if (pwd1==''){
+                            alert("Field cannot be empty");
+                            return false
+                        }  
+                        else if(pwd1 != pwd2){   
+                            alert("Passwords did not match"); 
+                            return false 
+                        }
+                        if(pwd1.length < 8) {  
+                            alert("**Password length must be atleast 8 characters");
+                            return false;    
+                        }  
+                    }
+            </script>
+            </div>
+{% endblock %}
