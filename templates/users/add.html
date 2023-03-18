@@ -11,20 +11,20 @@
                     <input type="text" name="User LN"  required/>
                     <br>
 
-                    Email:<br>
-                    <input type="text" name="User Username" required/>
+                    Email Address:<br>
+                    <input type="email" size="20" name="User Username" placeholder="Your Email Address.." required/>
                     <br>
 
                     Password:<br>
-                    <input type="password" class='password' name="password" onchange='check_pass();'/>
+                    <input type="password" class='password' name="password" required/>
                     <br>
 
-                    Retype Password:<br>
-                    <input type="password" class='confirmpassword' name="confirmpassword" onchange='check_pass();'/>
+                    Re-type Password:<br>
+                    <input type="password" class='confirmpassword' name="confirmpassword" required/>
                     <br>
 
                     Phone Number:<br>
-                    <input type="text" name="Phone Number"  required/>
+                    <input type="text" size='12' name="Phone Number"  required/>
                     <br>
 
                     Shop:<br>
@@ -47,9 +47,8 @@
                       </select>
                     <br>
                     <br>
-                    <button type = "submit" onclick="matchPassword()">Submit</button>  
+                    <button type = "submit" id=submit onclick="matchPassword()">Submit</button>  
   
-                    <!-- Click to reset fields -->  
                     <button type = "reset" value = "Reset" >Reset</button>  
                 </form>
                 <script>
@@ -58,17 +57,17 @@
                         var pwd2 = document.querySelector('.confirmpassword').value;
                         if (pwd1==''){
                             alert("Field cannot be empty");
-                            return false
+                            return false;
                         }  
-                        else if(pwd1 != pwd2){   
-                            alert("Passwords did not match"); 
-                            return false 
-                        }
-                        if(pwd1.length < 8) {  
+                        if (pwd1.length < 8) {  
                             alert("**Password length must be atleast 8 characters");
-                            return false;    
-                        }  
-                    }
+                            return false;
+                        }
+                        if (pwd1 != pwd2){   
+                            alert("Passwords did not match"); 
+                            return false;
+                        }
+  }
             </script>
             </div>
 {% endblock %}
