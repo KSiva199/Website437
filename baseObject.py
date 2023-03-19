@@ -9,6 +9,7 @@ class baseObject:
         self.fields = []
         self.pk = None
         self.fk=None
+        self.onefield=None
         self.data = [] #data is a list of dictionaries representing rows in our table
         self.establishConnection()
         self.getFields()

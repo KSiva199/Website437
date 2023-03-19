@@ -15,7 +15,7 @@
 <body>
     <h1 style="background-color:powderblue;">Welcome, {{user.data[0]['User FN']}} {{user.data[0]['User LN']}}</h1>
     <h2> Please Choose an Option </h2>
-    <a href="">Report a Problem</a><br>
+    <a href="{{url_for('/wo/manage?pkval=new')}}">Report a Problem</a><br>
     <a href="">Update Your Account</a><br>
     <a href="">Review Work Orders</a><br>
     <a href="">Add a Message to an Open Work Order</a><br><br>
