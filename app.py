@@ -5,6 +5,9 @@ from flask_session import Session
 from datetime import timedelta
 from Users import Users
 from WO import WO
+from Assets import Assets
+from Problem_Codes import Problem_Codes
+from WO_Communication import WO_Communication
 
 #create Flask app instance
 app = Flask(__name__,static_url_path='')
@@ -102,7 +105,15 @@ def manage_WO():
         return render_template('wo/add.html',obj = wo)
     else:
         wo.getById(pkval)
-        return render_template('wo/manage.html',obj = wo)
+        uR = Users()
+        uR.getByID(wo.data['RequesterID'])
+        uT = Users()
+        uR.getByID(wo.data['TechnicianID'])
+        a = Assets()
+        a.getByID(wo.data['AssetID'])
+        p = Problem_Codes()
+        p.getByID9(wo.data['ProblemID'])
+        return render_template('wo/manage.html',wo=wo,uR=uR,uT=uT,a=a,p=p)
 
 if __name__ == '__main__':
    app.run(host='127.0.0.1',debug=True)  

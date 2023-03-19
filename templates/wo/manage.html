@@ -1,32 +1,34 @@
+//wo=wo,uR=uR,uT=uT,a=a,p=p
+
 {% extends "base.html" %}
 
 {% block content %}
             <div>
-                <form action="/wo/manage?pkval={{ obj.data[0].id }}&action=update" method="POST">
-                    <b>Work Order ID: {{ obj.WorkOrderID }}</b><br>
+                <form action="/wo/manage?pkval={{ wo.data[0].id }}&action=update" method="POST">
+                    <b>Work Order ID: {{ wo.data[0].WorkOrderID }}</b><br>
                     Reported Issue:<br>
-                    <input type="text" size=100 name="Issue" value="{{ obj.data[0].Issue }}" />
+                    <input type="text" size=100 name="Issue" value="{{ wo.data[0].Issue }}" />
                     <br>
                     Requester:<br>
-                    <input type="text" name="RequesterID" value="{{ obj.data[0].RequesterID }}" />
+                    <input type="text" name="RequesterID" value="{{ wo.data[0].RequesterID }}" />
                     <br>
                     Location/Asset:<br>
-                    <input type="text" name="AssetID" value="{{ obj.data[0].AssetID }}" />
+                    <input type="text" name="AssetID" value="{{ wo.data[0].AssetID }}" />
                     <br>
                     Work Order Status:<br>
-                    <input type="text" name="Status" value="{{ obj.data[0].Status }}" />
+                    <input type="text" name="Status" value="{{ wo.data[0].Status }}" />
                     <br>
                     Assigned Technician:<br>
-                    <input type="text" name="Status" value="{{ obj.data[0].TechnicianID }}" />
+                    <input type="text" name="Status" value="{{ wo.data[0].TechnicianID }}" />
                     <br>
                     Facilities Shop:<br>
-                    <input type="text" name="Shop" value="{{ obj.data[0].Shop }}" />
+                    <input type="text" name="Shop" value="{{ wo.data[0].Shop }}" />
                     <br>
                     Solution:<br>
-                    <input type="text" name="Solution" value="{{ obj.data[0].Solution }}" />
+                    <input type="text" name="Solution" value="{{ wo.data[0].Solution }}" />
                     <br>
                     Labor Hours:<br>
-                    <input type="text" name="LaborHours" value="{{ obj.data[0].LaborHours }}" />
+                    <input type="text" name="LaborHours" value="{{ wo.data[0].LaborHours }}" />
                     <br>
                     <br>
                     <input type="submit" value="Submit" />
