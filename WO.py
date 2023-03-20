@@ -2,11 +2,11 @@ from baseObject import baseObject
 
 class WO(baseObject):
     def __init__(self):
-        self.setup('WORK ORDERS')
+        self.setup('WorkOrders')
     def toList(self):
         l = []
         for row in self.data:
-            s = f"{row['Request Date']} {row['Issue']} {row['Shop']} {row['Status']}  {row['Labor Hours']} {row['Solution Notes']} {row['Requester']} {row['Problem Code']} {row['Asset']} {row['Assigned Tech']}"  
+            s = f"{row['RequestDate']} {row['Issue']} {row['Shop']} {row['Status']}  {row['LaborHours']} {row['Solution']} {row['RequesterID']} {row['ProblemID']} {row['AssetID']} {row['TechnicianID']}"  
             l.append(s)
         return l
     def getByWOID(self,id): #field,value

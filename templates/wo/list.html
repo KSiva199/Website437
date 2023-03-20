@@ -3,7 +3,7 @@
 {% block content %}
         WO# | Requested Date | Status | Requester | Asset |  <br>
             <div>
-                {% for obj in objs.data  %}
+                {% for obj in wo.data  %}
 					<div> 
                     <a href="/wo/manage?pkval={{ obj.WorkOrderID }}">{{ obj.WorkOrderID }}</a> | {{ obj.RequestDate }} |
                     {{ obj.Status }} | {{ obj.RequesterID }} | {{ obj.AssetID }}
