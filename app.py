@@ -33,30 +33,48 @@ def register():
 def manage_user():
     o =Users()
     d = {}
-    d['User FN'] = request.form.get('User FN')
-    d['User LN'] = request.form.get('User LN')
-    d['User Username'] = request.form.get('User Username')
+    d['UserFirstName'] = request.form.get('UserFirstName')
+    d['UserLastName'] = request.form.get('UserLastName')
+    d['Username'] = request.form.get('Username')
     d['Password'] = request.form.get('password')
-    d['Phone Number'] = request.form.get('Phone Number')
-    d['Role'] = request.form.get('Role')
-    d['Shop'] = request.form.get('Shop')
-    o.getByUsername(request.form.get('User Username'))
-    #if o.data[0]['User Username']==request.form.get('User Username'):
-    #    return "Email address already exist"
-    #else: 
-    o.set(d)
+    d['PhoneNumber'] = request.form.get('PhoneNumber')
+    d['Role'] = 'Requester'
+    o.getByUsername(request.form.get('Username'))
+    if o.data[0]['Username']==request.form.get('Username'):
+        return "Email address already exist"
+    else: o.set(d)
     o.insert()
     return render_template('/users/home.html')
 
 @app.route('/login_user',methods=['GET','POST'])
 def login_user():
     o=Users()
-    o.getByUsername(request.form.get('User Username'))
-    if (o.data[0]['User Username']==request.form.get('User Username')) and (o.data[0]['Password']==request.form.get('Password')) :
+    o.getByUsername(request.form.get('Username'))
+    if (o.data[0]['Username']==request.form.get('Username')) and (o.data[0]['Password']==request.form.get('Password')) :
         return render_template('/users/requester_option.html',user=o)
     else: 
         return render_template('/users/home.html')
 
+@app.route('/update_user', methods=['GET','POST'])
+def update_user():
+    o=Users()
+    o.getById((o.pk))
+    o.data[0]['name'] = request.form.get('name')
+    o.data[0]['email'] = request.form.get('email')
+    o.data[0]['role'] = request.form.get('role')
+    o.data[0]['password'] = request.form.get('password')
+    o.update()
+    
+'''if pkval is None:
+    o.getAll()
+    return render_template('users/list.html',objs = o)
+if pkval == 'new':
+    o.createBlank()
+    return render_template('users/add.html',obj = o)
+else:
+    o.getById(pkval)
+    return render_template('users/manage.html',obj = o)
+'''
 
 
 @app.route('/list_wo')

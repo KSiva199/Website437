@@ -55,6 +55,12 @@ class baseObject:
         self.data = []
         for row in self.cur:
             self.data.append(row) 
+            
+    def createBlank(self):
+        d = {}
+        for field in self.fields:
+            d[field] = ''
+        self.set(d)
        
     def getAll(self):
         sql = f"Select * from `{self.tn}`" 
@@ -63,6 +69,7 @@ class baseObject:
         for row in self.cur:
             self.data.append(row)
     # UPDATE [tablename] SET [col] = [val] , .... WHERE [pk] = [our objects pk] 
+
     def update(self,n=0):
         vals=[]
         fvs=''

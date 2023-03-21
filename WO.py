@@ -2,7 +2,7 @@ from baseObject import baseObject
 
 class WO(baseObject):
     def __init__(self):
-        self.setup('WORK ORDERS')
+        self.setup('WorkOrders')
     def toList(self):
         l = []
         for row in self.data:
