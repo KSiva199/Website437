@@ -117,10 +117,10 @@ def manage_WO():
     
     if pkval is None:
         wo.getAll()
-        return render_template('wo/list.html',wo = wo)
+        return render_template('/wo/list.html',wo = wo)
     if pkval == 'new':
         wo.createBlank()
-        return render_template('wo/add.html',wo = wo)
+        return render_template('/wo/addwo.html',wo = wo)
     else:
         wo.getById(pkval)
         #uR = Users()
