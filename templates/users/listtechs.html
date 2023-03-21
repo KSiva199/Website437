@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <br><b>Technicians Available for Assignment</b><i>Select an tech to see their associated work orders</i><br>
+        Name | Shop/Trade | # of Work Orders  <br>
+            <div>
+                {% for obj in wo.data  %}
+					<div> 
+                    <a href="/wo/msgs?pkval={{ UserID }}"></a>{{ UserFirstName }} {{ UserLastName }}</a> | {{ Role }} |
+                    {{ [Sum of WorkOrders] }} 
+                    </div>
+				{% endfor %}
+            </div>
+{% endblock %}

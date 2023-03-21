@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <br><b>All Assets</b> <i>Select an asset to see its associated work orders</i><br>
+        Asset | Type | # of Work Orders  <br>
+            <div>
+                {% for obj in wo.data  %}
+					<div> 
+                    <a href="/wo/msgs?pkval={{ AssetID }}"></a>{{ AssetTag }} {{ AssetType }}</a> | {{ Role }} |
+                    {{ [Sum of WorkOrders] }} 
+                    </div>
+				{% endfor %}
+            </div>
+{% endblock %}

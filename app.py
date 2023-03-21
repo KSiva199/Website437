@@ -81,7 +81,7 @@ else:
 def list_WO():
     wo = WO()
     wo.getAll()
-    return render_template('/wo/list.html',objs = wo)
+    return render_template('/wo/list.html',wo = wo)
 
 @app.route('/wo/manage',methods=['GET','POST'])
 def manage_WO():
@@ -117,21 +117,21 @@ def manage_WO():
     
     if pkval is None:
         wo.getAll()
-        return render_template('wo/list.html',objs = wo)
+        return render_template('wo/list.html',wo = wo)
     if pkval == 'new':
         wo.createBlank()
-        return render_template('wo/add.html',obj = wo)
+        return render_template('wo/add.html',wo = wo)
     else:
         wo.getById(pkval)
-        uR = Users()
-        uR.getByID(wo.data['RequesterID'])
-        uT = Users()
-        uR.getByID(wo.data['TechnicianID'])
-        a = Assets()
-        a.getByID(wo.data['AssetID'])
-        p = Problem_Codes()
-        p.getByID9(wo.data['ProblemID'])
-        return render_template('wo/manage.html',wo=wo,uR=uR,uT=uT,a=a,p=p)
+        #uR = Users()
+        #uR.getById(wo.data[0]['RequesterID'])
+        #uT = Users()
+        #uR.getById(wo.data['TechnicianID'])
+        #a = Assets()
+        #a.getById(wo.data['AssetID'])
+        #p = Problem_Codes()
+        #p.getById(wo.data['ProblemID'])
+        return render_template('wo/manage.html',wo=wo)
 
 if __name__ == '__main__':
    app.run(host='127.0.0.1',debug=True)  

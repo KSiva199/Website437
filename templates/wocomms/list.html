@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <br><b>Communications for Work Order # {{ WorkOrderID }}</b><br>
+        Date | Message | User  <br>
+            <div>
+                {% for obj in wo.data  %}
+					<div> 
+                    <a href="/wo/msgs?pkval={{ WorkOrderID }}"></a>{{ CommDate }}</a> | {{ Message }} |
+                    {{ UserID }} 
+                    </div>
+				{% endfor %}
+            </div>
+{% endblock %}
