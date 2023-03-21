@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+            <div>
+				<b>Details for Work Order #{{ WorkOrderID }}</b><br>
+				Date Entered: {{ RequestDate }}<br>
+				Location/Asset: {{ AssetID }}<br>
+				Reported Problem: {{ Issue }}<br>
+				Technician: {{ UserID }}<br>
+				Status: {{ Status }}<br>
+				Solution: {{ Solution }}<br>
+
+				<a href="/wo/listmsgs"><b>See Messages</b></a><br>
+				<a href="/wo/list"><b>Return to Work Order List</b></a>
+			</div>
+{% endblock %}

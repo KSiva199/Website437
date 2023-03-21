@@ -49,12 +49,19 @@ class baseObject:
         #print(sql,vals)
         self.cur.execute(sql,vals)
         self.data[n][self.pk] = self.cur.lastrowid
+
     def getById(self,id):
         sql = f"Select * from `{self.tn}` where `{self.pk}` = %s" 
         self.cur.execute(sql,(id))
         self.data = []
         for row in self.cur:
-            self.data.append(row) 
+            self.data.append(row)
+
+    def createBlank(self):
+        d = {}
+        for field in self.fields:
+            d[field] = ''
+        self.set(d)
        
     def getAll(self):
         sql = f"Select * from `{self.tn}`" 

@@ -57,8 +57,6 @@ def login_user():
     else: 
         return render_template('/users/home.html')
 
-
-
 @app.route('/wo/list')
 def list_WO():
     wo = WO()

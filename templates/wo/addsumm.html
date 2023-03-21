@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+            <div>
+			<b>Please review the below before submitting the work order:</b><br>
+			Requester: {{ UserID }}<br>
+			Work Order #: {{ WorkOrderID }}<br>
+			Date Entered: {{ RequestDate }}<br>
+			Location/Asset: {{ AssetID }}<br>
+			Reported Problem: {{ Issue }}<br>
+
+			<!-- Need a Submit button-->
+			<button type ="submit" value = "Submit" > Submit</button>
+			<!-- Click to reset fields -->  
+			<button type = "reset" value = "Make Changes" >Reset</button>  
+			</div>
+{% endblock %}
