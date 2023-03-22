@@ -2,10 +2,10 @@ from baseObject import baseObject
 
 class Problem_Codes(baseObject):
     def __init__(self):
-        self.setup('PROBLEM_CODES')
+        self.setup('Problems')
     def toList(self):
         l = []
         for row in self.data:
-            s = f"{row['Problem Code']} {row['Problem Description']} {row['Shop']}"  
+            s = f"{row['ProblemCode']} {row['ProblemDesc']} {row['Shop']}"  
             l.append(s)
         return l
