@@ -7,6 +7,7 @@ class baseObject:
         self.conn = None
         self.cur = None
         self.fields = []
+        self.errors = []
         self.pk = None
         self.fk=None
         self.onefield=None

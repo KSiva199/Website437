@@ -81,7 +81,7 @@ else:
 def list_WO():
     wo = WO()
     wo.getAll()
-    return render_template('/wo/list.html',wo = wo)
+    return render_template('/wo/listwo.html',wo = wo)
 
 @app.route('/wo/manage',methods=['GET','POST'])
 def manage_WO():
@@ -100,7 +100,10 @@ def manage_WO():
         d['AssetID'] = request.form.get('AssetID')
         d['TechnicianID'] = request.form.get('TechnicianID')
         wo.set(d)
-        wo.insert()
+        if wo.verifyNew():
+            wo.insert()
+        else:
+            return render_template('/wo/addwo.html',wo = wo)
     if action is not None and action == 'update':
         wo.getById(pkval)
         wo.data[0]['Issue'] = request.form.get('Issue')
@@ -113,11 +116,15 @@ def manage_WO():
         wo.data[0]['AssetID'] = request.form.get('AssetID')
         wo.data[0]['TechnicianID'] = request.form.get('TechnicianID')
         wo.set(d)
-        wo.update()
+        if wo.verifyUpdt():
+            wo.update()
+        else:
+            return render_template('/wo/manage.html',wo = wo)
+        
     
     if pkval is None:
         wo.getAll()
-        return render_template('/wo/list.html',wo = wo)
+        return render_template('/wo/listwo.html',wo = wo)
     if pkval == 'new':
         wo.createBlank()
         return render_template('/wo/addwo.html',wo = wo)

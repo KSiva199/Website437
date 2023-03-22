@@ -6,7 +6,7 @@ class WO_Communication(baseObject):
     def toList(self):
         l = []
         for row in self.data:
-            s = f"{row['Communication Date']} {row['Message']} {row['WorkOrderID']}  {row['RequesterID']} {row['TechnicianID']}"  
+            s = f"{row['CommDate']} {row['Message']} {row['WorkOrderID']}  {row['UserID']}"  
             l.append(s)
         return l
     def getByWOCommID(self,id): #field,value
