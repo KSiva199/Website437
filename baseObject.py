@@ -71,6 +71,15 @@ class baseObject:
         for row in self.cur:
             self.data.append(row)
     # UPDATE [tablename] SET [col] = [val] , .... WHERE [pk] = [our objects pk] 
+    
+    def getByField(self,field,val):
+        sql = f"Select * from `{self.tn}` where `{field}` = %s" 
+        print(sql,val)
+        self.cur.execute(sql,(val))
+        self.data = []
+        for row in self.cur:
+            self.data.append(row)
+
 
     def update(self,n=0):
         vals=[]
