@@ -17,10 +17,6 @@ class Users(baseObject):
             self.data.append(row)
         
     def verify_new(self,n=0):
-        if self.data[n]['email'] == '':
-            self.errors.append('Email cannot be blank.')
-        if '@' not in self.data[n]['email']:
-            self.errors.append('Email must contain @.')
         u = Users()
         u.getByField('email',self.data[n]['email'])
         if len(u.data) > 0:

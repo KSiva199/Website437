@@ -40,11 +40,11 @@ def manage_user():
     d['PhoneNumber'] = request.form.get('PhoneNumber')
     d['Role'] = 'Requester'
     o.getByUsername(request.form.get('Username'))
-    if o.verify_new:
+    if o.verify_new==True:
         o.insert()
         return render_template('/users/home.html',msg='User Added')
     else:
-        return render_template('/users/home.html', msg='Try Again')
+        return render_template('/users/home.html', msg="Try Again")
 
 @app.route('/login_user',methods=['GET','POST'])
 def login_user():

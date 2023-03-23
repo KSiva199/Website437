@@ -27,7 +27,30 @@
                     <input type="text" size='12' name="PhoneNumber"  required/>
                     <br>
 
-                    <input type="submit" value="Submit" />
+                    <br>
+                    <button type = "submit" id=submit onclick="matchPassword()">Submit</button>  
+  
+                    <button type = "reset" value = "Reset" >Reset</button>  
+
+                </form>
+                <script>
+                    function matchPassword() {  
+                        var pwd1 = document.querySelector('.password').value;
+                        var pwd2 = document.querySelector('.confirmpassword').value;
+                        if (pwd1==''){
+                            alert("Field cannot be empty");
+                            return false;
+                        }  
+                        if (pwd1.length < 8) {  
+                            alert("**Password length must be atleast 8 characters");
+                            return false;
+                        }
+                        if (pwd1 != pwd2){   
+                            alert("Passwords did not match"); 
+                            return false;
+                        }
+  }
+                </script>
                 </form>
             </div>
 {% endblock %}
