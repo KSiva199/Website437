@@ -8,6 +8,7 @@ from WO import WO
 from Assets import Assets
 from Problem_Codes import Problem_Codes
 from WO_Communication import WO_Communication
+import time
 
 #create Flask app instance
 app = Flask(__name__,static_url_path='')
@@ -36,15 +37,16 @@ def manage_user():
     d['UserFirstName'] = request.form.get('UserFirstName')
     d['UserLastName'] = request.form.get('UserLastName')
     d['Username'] = request.form.get('Username')
-    d['Password'] = request.form.get('password')
+    d['Password'] = request.form.get('Password')
+    d['Password2']= request.form.get('ConfirmPassword')
     d['PhoneNumber'] = request.form.get('PhoneNumber')
     d['Role'] = 'Requester'
-    o.getByUsername(request.form.get('Username'))
-    if o.verify_new==True:
+    o.set(d)
+    if o.verify_new()==True:
         o.insert()
         return render_template('/users/home.html',msg='User Added')
     else:
-        return render_template('/users/home.html', msg="Try Again")
+        return render_template('/users/add.html', obj=o)
 
 @app.route('/login_user',methods=['GET','POST'])
 def login_user():
@@ -64,6 +66,19 @@ def update_user():
     o.data[0]['role'] = request.form.get('role')
     o.data[0]['password'] = request.form.get('password')
     o.update()
+
+def checkSession():
+    if 'active' in session.keys():
+        timeSinceAct = time.time() - session['active']
+        print(timeSinceAct)
+        if timeSinceAct > 500:
+            session['msg'] = 'Your session has timed out.'
+            return False
+        else:
+            session['active'] = time.time()
+            return True
+    else:
+        return False  
     
 '''if pkval is None:
     o.getAll()

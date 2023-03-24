@@ -1,4 +1,5 @@
 from baseObject import baseObject
+import hashlib
 
 class Users(baseObject):
     def __init__(self):
@@ -16,40 +17,64 @@ class Users(baseObject):
         for row in self.cur:
             self.data.append(row)
         
+    def hashPassword(self,pw):
+        pw = pw+'xyz'
+        return hashlib.md5(pw.encode('utf-8')).hexdigest()
+    
     def verify_new(self,n=0):
+        
+        if self.data[n]['Username'] == '':
+            self.errors.append('Email cannot be blank.')
+        if '@' not in self.data[n]['Username']:
+            self.errors.append('Email must contain @.')
         u = Users()
-        u.getByField('email',self.data[n]['email'])
+        u.getByField('Username',self.data[n]['Username'])
         if len(u.data) > 0:
             self.errors.append('Email already in use.')
-        if len(self.data[n]['password']) < 2:
+        if len(self.data[n]['Password']) < 2:
             self.errors.append('Password must be > 1 chars.')
         else:
-            self.data[n]['password'] = self.hashPassword(self.data[n]['password'])
+            self.data[n]['Password'] = self.hashPassword(self.data[n]['Password'])
         if len(self.errors ) == 0:
             return True
         else:
             return False
-
+        
     def verify_update(self,n=0):
-        if self.data[n]['email'] == '':
+        if self.data[n]['Username'] == '':
             self.errors.append('Email cannot be blank.')
-        if '@' not in self.data[n]['email']:
+        if '@' not in self.data[n]['Username']:
             self.errors.append('Email must contain @.')
         u = Users()
-        u.getByField('email',self.data[n]['email'])
+        u.getByField('Username',self.data[n]['Username'])
         if len(u.data) > 0 and u.data[0]['id'] != self.data[n]['id']:
-            self.errors.append('Email already in use.')     
-        if len(self.data[n]['password']) > 0: #user intends to change pw
-            if self.data[n]['password'] != self.data[n]['password2']:
+            self.errors.append('Email already in use.')
+            
+            
+        if len(self.data[n]['Password']) > 0: #user intends to change pw
+            if self.data[n]['Password'] != self.data[n]['ConfirmPassword']:
                 self.errors.append('Retyped password must match.')
-            if len(self.data[n]['password']) < 5:
+            if len(self.data[n]['Password']) < 5:
                 self.errors.append('Password must be > 4 chars.')
             else:
-                self.data[n]['password'] = self.hashPassword(self.data[n]['password'])
+                self.data[n]['Password'] = self.hashPassword(self.data[n]['Password'])
         else:
-            del self.data[n]['password']
+            del self.data[n]['Password']
               
         if len(self.errors ) == 0:
             return True
         else:
             return False 
+    def tryLogin(self, email, password):
+        hpw = self.hashPassword(password)
+        
+        sql = f"SELECT * FROM `{self.tn}` WHERE `email` = %s AND `Password` = %s;"
+        #print(sql,email,password,hpw)
+        self.cur.execute(sql,(email,hpw))
+        self.data = []
+        for row in self.cur:
+            self.data.append(row)
+        if len(self.data) == 1:
+            return True
+        else:
+            return False

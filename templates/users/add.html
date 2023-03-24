@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+            <div style="color:red;">
+                {% if obj.errors|length > 0 %}
+                    {% for error in obj.errors  %}
+                        <div>{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
             <div>
                 <form method="POST" action="manage_user">
                     First Name:<br>
@@ -12,15 +19,15 @@
                     <br>
 
                     Email Address:<br>
-                    <input type="email" size="20" name="Username" placeholder="Your Email Address.." required/>
+                    <input type="text" size="20" name="Username" placeholder="Your Email Address.." required/>
                     <br>
 
                     Password:<br>
-                    <input type="password" class='password' name="password" required/>
+                    <input type="password" class='password' name="Password" required/>
                     <br>
 
                     Re-type Password:<br>
-                    <input type="password" class='confirmpassword' name="confirmpassword" required/>
+                    <input type="password" class='confirmpassword' name="ConfirmPassword" required/>
                     <br>
 
                     Phone Number:<br>
@@ -32,25 +39,6 @@
   
                     <button type = "reset" value = "Reset" >Reset</button>  
 
-                </form>
-                <script>
-                    function matchPassword() {  
-                        var pwd1 = document.querySelector('.password').value;
-                        var pwd2 = document.querySelector('.confirmpassword').value;
-                        if (pwd1==''){
-                            alert("Field cannot be empty");
-                            return false;
-                        }  
-                        if (pwd1.length < 8) {  
-                            alert("**Password length must be atleast 8 characters");
-                            return false;
-                        }
-                        if (pwd1 != pwd2){   
-                            alert("Passwords did not match"); 
-                            return false;
-                        }
-  }
-                </script>
                 </form>
             </div>
 {% endblock %}
