@@ -3,6 +3,7 @@ from flask import render_template
 from flask import request,session, redirect, url_for, escape,send_from_directory,make_response 
 from flask_session import Session
 from datetime import timedelta
+from datetime import datetime
 from Users import Users
 from WO import WO
 from Assets import Assets
@@ -168,6 +169,7 @@ def manage_WO():
     if action is not None and action == 'insert':
         d = {}
         d['Issue'] = request.form.get('Issue')
+        d['RequestDate'] = request.form.get('RequestDate')
         d['Shop'] = request.form.get('Shop')
         d['Status'] = request.form.get('Status')
         d['LaborHours'] = request.form.get('LaborHours')
@@ -176,6 +178,17 @@ def manage_WO():
         d['ProblemID'] = request.form.get('ProblemID')
         d['AssetID'] = request.form.get('AssetID')
         d['TechnicianID'] = request.form.get('TechnicianID')
+
+        possEmpty = ['RequestDate','Shop','Status','LaborHours','Solution','RequesterID','ProblemID','TechnicianID']
+        for p in possEmpty:
+            if d[p] is None:
+                if p == 'RequestDate':
+                    d[p] = datetime.now()
+                elif p == 'Status':
+                    d[p] = 'Open'
+                elif p == 'RequesterID':
+                    d[p] = session['user']['UserID']
+
         wo.set(d)
         if wo.verifyNew():
             wo.insert()
@@ -198,7 +211,6 @@ def manage_WO():
         else:
             return render_template('/wo/manage.html',wo = wo)
         
-    
     if pkval is None:
         wo.getAll()
         return render_template('/wo/listwo.html',wo = wo)
