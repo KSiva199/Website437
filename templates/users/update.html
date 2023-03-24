@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+            <div style="color:red;">
+                {% if obj.errors|length > 0 %}
+                    {% for error in obj.errors  %}
+                        <div>{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div>
+                <form action="update_user" method="POST">
+                    First Name:<br>
+                    <input type="text" name="name" value="{{ obj.data[0].UserFirstName }}" />
+                    <br>
+
+                    Last Name:<br>
+                    <input type="text" name="name" value="{{ obj.data[0].UserLastName }}" />
+                    <br>
+
+                    Email:<br>
+                    <input type="text" name="email" value="{{ obj.data[0].Username}}"  readonly/>
+                    <br>
+
+                    Password:<br>
+                    <input type="password" name="password" value="" />
+                    <br>
+
+                    Retype Password:<br>
+                    <input type="password" name="password2" value="" />
+                    <br>
+                    <br>
+                    <input type="submit" value="Submit" />
+                </form>
+                
+            </div>
+            <div>
+                <br><br>
+            </div>
+{% endblock %}

@@ -1,4 +1,5 @@
 from baseObject import baseObject
+import hashlib
 
 class Users(baseObject):
     def __init__(self):
@@ -15,3 +16,60 @@ class Users(baseObject):
         self.data = []
         for row in self.cur:
             self.data.append(row)
+        
+    def hashPassword(self,pw):
+        pw = pw+'xyz'
+        return hashlib.md5(pw.encode('utf-8')).hexdigest()
+    
+    def verify_new(self,n=0):
+        
+        if self.data[n]['Username'] == '':
+            self.errors.append('Email cannot be blank.')
+        if '@' not in self.data[n]['Username']:
+            self.errors.append('Email must contain @.')
+        u = Users()
+        u.getByField('Username',self.data[n]['Username'])
+        if len(u.data) > 0:
+            self.errors.append('Email already in use.')
+        if self.data[n]['Password'] != self.data[n]['Password2']:
+                self.errors.append('Re-typed password must match.')
+        if len(self.data[n]['Password']) < 4:
+            self.errors.append('Password must be greater than 4 chars.')
+        else:
+            self.data[n]['Password'] = self.hashPassword(self.data[n]['Password'])
+        if len(self.errors ) == 0:
+            return True
+        else:
+            return False
+        
+    def verify_update(self,n=0):
+        u = Users()
+        u.getByField('Username',self.data[n]['Username'])
+        if len(self.data[n]['Password']) > 0: #user intends to change pw
+            if self.data[n]['Password'] != self.data[n]['Password2']:
+                self.errors.append('Retyped password must match.')
+            if len(self.data[n]['Password']) < 5:
+                self.errors.append('Password must be > 4 chars.')
+            else:
+                self.data[n]['Password'] = self.hashPassword(self.data[n]['Password'])
+        else:
+            del self.data[n]['Password']
+              
+        if len(self.errors ) == 0:
+            return True
+        else:
+            return False 
+        
+    def tryLogin(self, email, password):
+        hpw = self.hashPassword(password)
+        
+        sql = f"SELECT * FROM `{self.tn}` WHERE `email` = %s AND `Password` = %s;"
+        #print(sql,email,password,hpw)
+        self.cur.execute(sql,(email,hpw))
+        self.data = []
+        for row in self.cur:
+            self.data.append(row)
+        if len(self.data) == 1:
+            return True
+        else:
+            return False
