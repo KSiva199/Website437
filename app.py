@@ -28,47 +28,94 @@ def home(): #view function
 
 @app.route('/register')
 def register():
-    o =Users()
-    return render_template('/users/add.html',obj=o)
+    u =Users()
+    action = request.args.get('action')
+    if action is not None and action=='new':
+        return render_template('/users/add.html',obj=u)
+    if action is not None and action=='update':
+        pkval = request.args.get('pkval')
+        u.getById(pkval)
+        return render_template('/users/update.html',user=u)
+
 
 @app.route('/manage_user',methods=['GET','POST'])
 def manage_user():
-    o=Users()
-    d = {}
-    d['UserFirstName'] = request.form.get('UserFirstName')
-    d['UserLastName'] = request.form.get('UserLastName')
-    d['Username'] = request.form.get('Username')
-    d['Password'] = request.form.get('Password')
-    d['Password2']= request.form.get('ConfirmPassword')
-    d['PhoneNumber'] = request.form.get('PhoneNumber')
-    d['Role'] = 'Requester'
-    o.set(d)
-    if o.verify_new()==True:
-        o.insert()
-        return render_template('/users/home.html',msg='User Added')
-    else:
-        return render_template('/users/add.html', obj = o)
+    action = request.args.get('action')
+    pkval = request.args.get('pkval')
+    if action is not None and action=='new':
+        o=Users()
+        d = {}
+        d['UserFirstName'] = request.form.get('UserFirstName')
+        d['UserLastName'] = request.form.get('UserLastName')
+        d['Username'] = request.form.get('Username')
+        d['Password'] = request.form.get('Password')
+        d['Password2']= request.form.get('ConfirmPassword')
+        d['PhoneNumber'] = request.form.get('PhoneNumber')
+        d['Role'] = 'Requester'
+        o.set(d)
+        if o.verify_new()==True:
+            o.insert()
+            return render_template('/users/home.html',msg='User Added')
+        else:
+            return render_template('/users/add.html', obj = o)
+    if action is not None and action=='update':
+        o=Users()
+        o.getById(pkval)
+        o.data[0]['UserFirstName'] = request.form.get('UserFirstName')
+        o.data[0]['UserLasttName'] = request.form.get('UserLastName')
+        o.data[0]['Username'] = request.form.get('Username')
+        o.data[0]['Password'] = request.form.get('Password')
+        o.data[0]['Password2'] = request.form.get('ConfirmPassword')
+        o.data[0]['PhoneNumber'] = request.form.get('PhoneNumber')
+        o.data[0]['Role'] = 'Requester'
+        if o.verify_update():
+            o.update()
+            return render_template('/users/requester_option.html',user=o)
 
+    if pkval is None:
+        o.getAll()
+        return render_template('users/list.html',objs = o)
+    if pkval == 'new':
+        o.createBlank()
+        return render_template('users/add.html',obj = o)
+    else:
+        o.getById(pkval)
+        return render_template('users/manage.html',obj = o)
+    
 @app.route('/login_user',methods=['GET','POST'])
 def login_user():
-    o=Users()
-    o.getByUsername(request.form.get('Username'))
-    if (o.data[0]['Username']==request.form.get('Username')) and (o.data[0]['Password']==request.form.get('Password')) :
-        return render_template('/users/requester_option.html',user=o)
-    else: 
-        return render_template('/users/home.html')
+    if request.form.get('Username') is not None and request.form.get('Password') is not None:
+        u = Users()
+        if u.tryLogin(request.form.get('Username'),request.form.get('Password')):
+            u.getById(u.data[0]['UserID'])
+            print(u.data)
+            print('login ok')
+            session['user'] = u.data[0]
+            session['active'] = time.time()
+            
+            return render_template('/users/requester_option.html',user=u)
+        else:
+            print('login failed')
+            return render_template('users/home.html', title='Login', msg='Incorrect username or password.')
+    else:
+        if 'msg' not in session.keys() or session['msg'] is None:
+            m = 'Type your email and password to continue.'
+        else:
+            m = session['msg']
+            session['msg'] = None
+        return render_template('users/home.html', title='Login', msg=m)
+    
+@app.route('/logout',methods = ['GET','POST'])
+def logout():
+    if session.get('user') is not None:
+        del session['user']
+        del session['active']
+    return render_template('users/home.html', title='Login', msg='You have logged out.')
 
-@app.route('/update_user', methods=['GET','POST'])
-def update_user():
-    o=Users()
-    o.getById(o.pk)
-    o.data[0]['UserFirstName'] = request.form.get('UserFirstName')
-    o.data[0]['UserLasttName'] = request.form.get('UserLastName')
-    o.data[0]['password'] = request.form.get('Password')
-    o.data[0]['password2'] = request.form.get('ConfirmPassword')
-    if o.verify_update():
-        o.update()
-        return render_template('/users/requester_option.html',user=o)
+# endpoint route for static files
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
 
 def checkSession():
     if 'active' in session.keys():
@@ -81,7 +128,19 @@ def checkSession():
             session['active'] = time.time()
             return True
     else:
-        return False  
+        return False
+
+@app.route('/update_user', methods=['GET','POST'])
+def update_user():
+    o=Users()
+    o.getById(o.pk)
+    o.data[0]['UserFirstName'] = request.form.get('UserFirstName')
+    o.data[0]['UserLasttName'] = request.form.get('UserLastName')
+    o.data[0]['password'] = request.form.get('Password')
+    o.data[0]['password2'] = request.form.get('ConfirmPassword')
+    if o.verify_update():
+        o.update()
+        return render_template('/users/requester_option.html',user=o)
     
 '''if pkval is None:
     o.getAll()

@@ -60,12 +60,12 @@ class Users(baseObject):
         else:
             return False 
         
-    def tryLogin(self, email, password):
-        hpw = self.hashPassword(password)
+    def tryLogin(self, Username, Password):
+        hpw = self.hashPassword(Password)
         
-        sql = f"SELECT * FROM `{self.tn}` WHERE `email` = %s AND `Password` = %s;"
-        #print(sql,email,password,hpw)
-        self.cur.execute(sql,(email,hpw))
+        sql = f"SELECT * FROM `{self.tn}` WHERE `Username` = %s AND `Password` = %s;"
+        #print(sql,Username,Password,hpw)
+        self.cur.execute(sql,(Username,hpw))
         self.data = []
         for row in self.cur:
             self.data.append(row)

@@ -9,25 +9,28 @@
                 {% endif %}
             </div>
             <div>
-                <form action="update_user" method="POST">
+                <form action="manage_user?pkval={{user.data[0].UserID}}&action=update" method="POST">
                     First Name:<br>
-                    <input type="text" name="name" value="{{ obj.data[0].UserFirstName }}" />
+                    <input type="text" name="UserFirstName" value="{{ user.data[0].UserFirstName }}" />
                     <br>
 
                     Last Name:<br>
-                    <input type="text" name="name" value="{{ obj.data[0].UserLastName }}" />
+                    <input type="text" name="UserLastName" value="{{ user.data[0].UserLastName }}" />
                     <br>
 
                     Email:<br>
-                    <input type="text" name="email" value="{{ obj.data[0].Username}}"  readonly/>
+                    <input type="text" name="Username" value="{{ user.data[0].Username}}"  readonly/>
                     <br>
 
                     Password:<br>
-                    <input type="password" name="password" value="" />
+                    <input type="password" name="Password" value="" />
                     <br>
 
                     Retype Password:<br>
-                    <input type="password" name="password2" value="" />
+                    <input type="password" name="ConfirmPassword" value="" />
+                    <br>
+                    Phone Number:<br>
+                    <input type="number" name="PhoneNumber" value="{{ user.data[0].PhoneNumber}}" />
                     <br>
                     <br>
                     <input type="submit" value="Submit" />

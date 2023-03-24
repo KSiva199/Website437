@@ -9,7 +9,7 @@
                 {% endif %}
             </div>
             <div>
-                <form method="POST" action="manage_user">
+                <form method="POST" action="manage_user?action=new">
                     First Name:<br>
                     <input type="text" name="UserFirstName" required/>
                     <br>
@@ -35,7 +35,7 @@
                     <br>
 
                     <br>
-                    <button type = "submit" id=submit onclick="matchPassword()">Submit</button>  
+                    <button type = "submit" id=submit >Submit</button>  
   
                     <button type = "reset" value = "Reset" >Reset</button>  
 

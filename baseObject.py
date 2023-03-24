@@ -93,6 +93,7 @@ class baseObject:
         vals.append(self.data[n][self.pk])
         #print(sql,vals)
         self.cur.execute(sql,vals)
+
     def deleteById(self,id):
         sql = f"Delete from `{self.tn}` where `{self.pk}` = %s" 
         self.cur.execute(sql,(id))
