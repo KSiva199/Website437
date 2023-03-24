@@ -31,8 +31,10 @@ class Users(baseObject):
         u.getByField('Username',self.data[n]['Username'])
         if len(u.data) > 0:
             self.errors.append('Email already in use.')
-        if len(self.data[n]['Password']) < 2:
-            self.errors.append('Password must be > 1 chars.')
+        if self.data[n]['Password'] != self.data[n]['Password2']:
+                self.errors.append('Re-typed password must match.')
+        if len(self.data[n]['Password']) < 4:
+            self.errors.append('Password must be greater than 4 chars.')
         else:
             self.data[n]['Password'] = self.hashPassword(self.data[n]['Password'])
         if len(self.errors ) == 0:
@@ -41,18 +43,10 @@ class Users(baseObject):
             return False
         
     def verify_update(self,n=0):
-        if self.data[n]['Username'] == '':
-            self.errors.append('Email cannot be blank.')
-        if '@' not in self.data[n]['Username']:
-            self.errors.append('Email must contain @.')
         u = Users()
         u.getByField('Username',self.data[n]['Username'])
-        if len(u.data) > 0 and u.data[0]['id'] != self.data[n]['id']:
-            self.errors.append('Email already in use.')
-            
-            
         if len(self.data[n]['Password']) > 0: #user intends to change pw
-            if self.data[n]['Password'] != self.data[n]['ConfirmPassword']:
+            if self.data[n]['Password'] != self.data[n]['Password2']:
                 self.errors.append('Retyped password must match.')
             if len(self.data[n]['Password']) < 5:
                 self.errors.append('Password must be > 4 chars.')
@@ -65,6 +59,7 @@ class Users(baseObject):
             return True
         else:
             return False 
+        
     def tryLogin(self, email, password):
         hpw = self.hashPassword(password)
         

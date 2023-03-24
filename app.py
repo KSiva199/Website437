@@ -28,11 +28,12 @@ def home(): #view function
 
 @app.route('/register')
 def register():
-    return render_template('/users/add.html')
+    o =Users()
+    return render_template('/users/add.html',obj=o)
 
 @app.route('/manage_user',methods=['GET','POST'])
 def manage_user():
-    o =Users()
+    o=Users()
     d = {}
     d['UserFirstName'] = request.form.get('UserFirstName')
     d['UserLastName'] = request.form.get('UserLastName')
@@ -46,7 +47,7 @@ def manage_user():
         o.insert()
         return render_template('/users/home.html',msg='User Added')
     else:
-        return render_template('/users/add.html', obj=o)
+        return render_template('/users/add.html', obj = o)
 
 @app.route('/login_user',methods=['GET','POST'])
 def login_user():
@@ -60,12 +61,14 @@ def login_user():
 @app.route('/update_user', methods=['GET','POST'])
 def update_user():
     o=Users()
-    o.getById((o.pk))
-    o.data[0]['name'] = request.form.get('name')
-    o.data[0]['email'] = request.form.get('email')
-    o.data[0]['role'] = request.form.get('role')
-    o.data[0]['password'] = request.form.get('password')
-    o.update()
+    o.getById(o.pk)
+    o.data[0]['UserFirstName'] = request.form.get('UserFirstName')
+    o.data[0]['UserLasttName'] = request.form.get('UserLastName')
+    o.data[0]['password'] = request.form.get('Password')
+    o.data[0]['password2'] = request.form.get('ConfirmPassword')
+    if o.verify_update():
+        o.update()
+        return render_template('/users/requester_option.html',user=o)
 
 def checkSession():
     if 'active' in session.keys():
