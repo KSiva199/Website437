@@ -13,13 +13,7 @@
 </head>
 
 <body>
-    <div style="color:green;">
-        {% if user.errors|length > 0 %}
-            {% for error in user.errors  %}
-                <div>{{ error }}</div>
-            {% endfor %}
-        {% endif %}
-    </div>
+    
     <h1 style="background-color:powderblue;">Welcome, {{user.data[0]['UserFirstName']}} {{user.data[0]['UserLastName']}}</h1>
     <h2> Please Choose an Option </h2>
     <a href="/wo/manage?pkval=new">Report a Problem</a><br>
