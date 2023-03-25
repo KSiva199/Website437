@@ -8,15 +8,13 @@
                     {% endfor %}
 				{% endif %}
             </div>
-            <div>
-                <form method="POST" action="manage?action=insert">
+            <div>                                    <form method="POST" action="manage?action=insert">
                     Where is the problem? Or what item has a problem?<br>
                     Location/Asset: <input type="text" name="AssetID" required/>
                     <br>
                     Problem/Issue:<br>
-                    <textarea id="addwoiss" name="Issue" rows="4" cols="50">
-                    </textarea><br>
-                    <!-- Need a Submit button-->
+                    <textarea id="addwoiss" name="Issue" rows="4" cols="50" placeholder="Enter description of problem"></textarea><br>
+
                     <button type ="submit" value = "Submit" > Submit</button>
                     <!-- Click to reset fields -->  
                     <button type = "reset" value = "Reset" >Reset</button>  

@@ -26,7 +26,7 @@ class WO(baseObject):
         else:
             return True   
 
-    def verifyUpdt(self):
+    def verifyUpdt(self,n=0):
         if len(self.data[n]['Issue']) <= 10: 
             self.errors.append('Problem/Issue must be longer than 10 characters')
 

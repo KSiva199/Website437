@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="'en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Option Page</title>
+    <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+</head>
+
+<body>
+    
+    <h1 style="background-color:powderblue;">Welcome, {{user.data[0]['UserFirstName']}} {{user.data[0]['UserLastName']}}</h1>
+    <h2> Please Choose an Option </h2>
+    <a href="/list_wo">Review Assigned Work Orders</a><br>
+    <a href="/wo/manage?pkval=new">Report a Problem</a><br>
+    <a href="/register?pkval={{user.data[0].UserID}}&action=update">Update Your Contact Info</a><br>
+    <br>
+    <a href="{{url_for('home')}}" class="btn btn-info btn-lg">
+    <span class="glyphicon glyphicon-log-out"></span> Log out </a>
+   
+
+
+
+</body>
+
+</html>
