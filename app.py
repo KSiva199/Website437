@@ -22,11 +22,17 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=5)
 sess = Session()
 sess.init_app(app)
 
+@app.context_processor
+def inject_user():
+    return dict(me=session.get('user'))
+
 #Basic root route - show the word 'homepage'
 @app.route('/home')  #route name
 def home(): #view function
-    return render_template('/users/home.html')
-
+    if checkSession() == False: 
+        return render_template('/users/home.html')
+    return render_template('/users/home.html') 
+    
 @app.route('/register')
 def register():
     u =Users()
@@ -41,6 +47,8 @@ def register():
 
 @app.route('/manage_user',methods=['GET','POST'])
 def manage_user():
+    if checkSession() == False or session['user']['role'] != 'admin': 
+        return redirect('/home')
     action = request.args.get('action')
     pkval = request.args.get('pkval')
     if action is not None and action=='new':
@@ -93,7 +101,13 @@ def login_user():
             print('login ok')
             session['user'] = u.data[0]
             session['active'] = time.time()
-            return render_template('/users/requester_option.html',user=u)
+            if session['user']['Role'] == 'Manager':
+                return render_template('/users/manager_option.html', title='Main menu',user=u) 
+            elif session['user']['Role']=='Technician':
+                return render_template('/users/technician_option.html', title='Main menu',user=u)
+            else:
+                return render_template('/users/requester_option.html', title='Main menu',user=u) 
+            
         else:
             print('login failed')
             return render_template('users/home.html', title='Login', msg='Incorrect username or password.')
