@@ -92,7 +92,6 @@ def login_user():
             print('login ok')
             session['user'] = u.data[0]
             session['active'] = time.time()
-            
             return render_template('/users/requester_option.html',user=u)
         else:
             print('login failed')
