@@ -47,8 +47,8 @@ def register():
 
 @app.route('/manage_user',methods=['GET','POST'])
 def manage_user():
-    if checkSession() == False or session['user']['role'] != 'admin': 
-        return redirect('/home')
+    #if checkSession() == False or session['user']['role'] != 'Requester': 
+    #    return redirect('/home')
     action = request.args.get('action')
     pkval = request.args.get('pkval')
     if action is not None and action=='new':
