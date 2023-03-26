@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="background-color:powderblue;">Work Order Summary</h1>
+<h3> Summary of Work Order #{{ wo.data[0].WorkOrderID }}</h3>
+            <div>
+				<b>Date Entered:</b> {{ wo.data[0].RequestDate }}<br>
+				<b>Location/Asset:</b> {{ wo.data[0].AssetID }}<br>
+				<b>Reported Problem:</b> {{ wo.data[0].Issue }}<br>
+				<b>Technician:</b> {{ wo.data[0].TechnicianID }}<br>
+				<b>Status:</b> {{ wo.data[0].Status }}<br>
+				<b>Problem Code:</b> {{ wo.data[0].ProblemID }}<br>
+				<b>Hours Spent:</b> {{ wo.data[0].LaborHours }}<br>
+				<b>Solution:</b> {{ wo.data[0].Solution }}<br>
+
+
+
+				<a href="/wo/listmsgs"><b>View Work Order Messages</b></a> &nbsp &nbsp<br><br>
+				<div title="Assign Tech or Problem ID">Edit Details</div>
+				<div title="Close Work Order">Close Work Order</div>
+				<br>
+				<a href="/wo/list_wo"><b>Return to Work Order List</b></a>&nbsp &nbsp
+				<a href="/wo/manage">Return to Main Menu</a><br>
+			</div>
+{% endblock %}

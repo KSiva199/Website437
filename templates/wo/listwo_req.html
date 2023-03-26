@@ -2,15 +2,16 @@
 
 {% block content %}
 <h1 style="background-color:powderblue;">Work Order List</h1>
-WO# | Requested Date | Status | Requester | Asset 
+<h3> Work Orders Requested by {{me.UserFirstName}} {{me.UserLastName}} </h3>
+WO# | Date | Issue | Status | Asset 
        <br>
             <div>
                 {% for obj in wo.data  %}
 					<div> 
                     <a href="/wo/manage?pkval={{ obj.WorkOrderID }}">{{ obj.WorkOrderID }}</a> | {{ obj.RequestDate }} |
-                    {{ obj.Status }} | {{ obj.RequesterID }} | {{ obj.AssetID }}
+                    {{ obj.Issue }} || {{ obj.Status }} || {{ obj.AssetID }}
                     </div>
 				{% endfor %}
-                <a href="/wo/manage?pkval=new">Create New Work Order</a><br>        <a href="/wo/manage?pkval=new">Create New Work Order</a><br>
+                <a href="/wo/manage?pkval=new">Create New Work Order</a>    <a href="/wo/manage">Return to Options</a><br>
             </div>
 {% endblock %}

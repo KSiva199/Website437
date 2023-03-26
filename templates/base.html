@@ -5,9 +5,10 @@
             
         </head>
         <body>
-		
-		
+		<br>
+
 		{% block content %}{% endblock %}
-		
+        <a href="{{url_for('home')}}" class="btn btn-info btn-lg">
+        <span class="glyphicon glyphicon-log-out"></span> Logout </a>
 		</body>
     </html>

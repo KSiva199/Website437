@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-            <div>
+            <div> <form method="POST" action="manage?action=insert"></form>
 				<b>Please review the below before submitting:</b><br>
-				Requester: {{ UserID }}<br>
-				Work Order#: {{ WorkOrderID }}<br>
-				Date Entered: {{ RequestDate }}<br>
-				Location/Asset: {{ AssetID }}<br>
-				Reported Problem: {{ Issue }}<br>
+				Requester: {{ wo.UserID }}<br>
+				Work Order#: {{ wo.WorkOrderID }}<br>
+				Date Entered: {{ wo.RequestDate }}<br>
+				Location/Asset: {{ wo.AssetID }}<br>
+				Reported Problem: {{ wo.Issue }}<br>
 
 				<!-- Need a Submit button-->
 				<button type ="submit" value = "Submit" > Submit</button>
 				<!-- Click to reset fields -->  
 				<button type = "reset" value = "Make Changes" >Reset</button>  
+			</form>
 			</div>
 {% endblock %}
