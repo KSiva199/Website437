@@ -192,6 +192,9 @@ def manage_WO():
         d['AssetID'] = request.form.get('AssetID')
         d['TechnicianID'] = request.form.get('TechnicianID')
 
+        if d['AssetID'] is not None:
+            d['AssetID'] = int(d['AssetID'])
+
         possEmpty = ['RequestDate','Shop','Status','LaborHours','Solution','RequesterID','ProblemID','TechnicianID']
         for p in possEmpty:
             if d[p] is None:
@@ -200,8 +203,13 @@ def manage_WO():
                 elif p == 'Status':
                     d[p] = 'Open'
                 elif p == 'RequesterID':
-                    d[p] = session['user']['UserID']
-
+                    d[p] = int(session['user']['UserID'])
+        
+        for key in d:
+            if key in ['ProblemID','AssetID','TechnicianID'] and d[key] is not None:
+                d[key] = int(d[key])
+        print(d)
+        
         wo.set(d)
         if wo.verifyNew():
             wo.insert()
