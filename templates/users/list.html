@@ -1,9 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
-            <div>
-                {% for obj in objs.data  %}
-					<div> <a href="manage?pkval={{ obj.id }}">{{ obj.id }}</a> {{ obj.name }} </div>
+<a href="manager_option.html"> Home </a>
+<br>
+<br>
+<br>
+                <table>
+                    <tr>
+                        <th> User ID </th>
+                        <th> Username </th>
+                        <th> User First Name </th>
+                        <th> User Last Name</th>
+                        <th> Role </th>
+                        <th> Phone Number </th>
+                    </tr>
+                <div>
+               {% for user in obj.data  %}
+                <tr>  
+                <td> <div> <a href="/users/manage_user?pkval={{ obj.UserID }}"> {{ user.UserID}} </a> </td>
+                    <td>{{ user.Username }} </td>  
+                    <td>{{ user.UserFirstName }} </td> 
+                    <td>{{ user.UserLastName }} </td> 
+                    <td>{{ user.Role }} </td>
+                    <td>{{ user.PhoneNumber }} </td> 
+                </div></td>
+                </tr>
 				{% endfor %}
-            </div>
+                
+                </div>
+                </table>
 {% endblock %}

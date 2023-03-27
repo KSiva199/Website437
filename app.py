@@ -144,6 +144,12 @@ def checkSession():
     else:
         return False
 
+@app.route('/list_users')
+def list_users():
+    u = Users()
+    u.getAll()
+    return render_template('/users/list.html',obj = u)
+
 @app.route('/update_user', methods=['GET','POST'])
 def update_user():
     o=Users()
