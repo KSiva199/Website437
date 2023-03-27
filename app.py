@@ -60,6 +60,7 @@ def manage_user():
         d['Password'] = request.form.get('Password')
         d['Password2']= request.form.get('ConfirmPassword')
         d['PhoneNumber'] = request.form.get('PhoneNumber')
+        d['LocationID'] = request.form.get('LocationID')
         d['Role'] = 'Requester'
         o.set(d)
         if o.verify_new()==True:
