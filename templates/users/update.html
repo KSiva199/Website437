@@ -32,6 +32,13 @@
                     Phone Number:<br>
                     <input type="number" name="PhoneNumber" value="{{ user.data[0].PhoneNumber}}" />
                     <br>
+                    Location:<br>
+                    <select name="LocationID" value="{{ user.data[0].LocationID}}">
+                        <option >Please Choose</option>
+                        <option >Location1</option>
+                        <option >Location2</option>
+                        <option >Location3</option>
+                      </select>
                     <br>
                     <input type="submit" value="Submit" />
                 </form>

@@ -91,6 +91,17 @@ def manage_user():
     else:
         o.getById(pkval)
         return render_template('users/manage.html',obj = o)
+@app.route('/redirect_user', methods=['GET','POST'])
+def redirect():
+    u=Users()
+    action = request.args.get('action')
+    if action is not None and action=='manager':
+        return render_template('/users/manager_option.html', title='Main menu',user=u)
+    if action is not None and action=='technician':
+        return render_template('/users/technician_option.html', title='Main menu',user=u)
+    if action is not None and action=='requester':
+        return render_template('/users/requester_option.html', title='Main menu',user=u)
+
     
 @app.route('/login_user',methods=['GET','POST'])
 def login_user():
