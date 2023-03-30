@@ -22,13 +22,6 @@
                     <input type="text" name="Username" value="{{ user.data[0].Username}}"  readonly/>
                     <br>
 
-                    Password:<br>
-                    <input type="password" name="Password" value="" />
-                    <br>
-
-                    Retype Password:<br>
-                    <input type="password" name="ConfirmPassword" value="" />
-                    <br>
                     Phone Number:<br>
                     <input type="number" name="PhoneNumber" value="{{ user.data[0].PhoneNumber}}" />
                     <br>
@@ -40,7 +33,13 @@
                         <option >Location3</option>
                       </select>
                     <br>
-                    
+                    Role:<br>
+                    <select name="Role" value="{{user.data[0].Role}}">
+                            <option>Please Choose</option>
+                            <option >Requester</option>
+                            <option >Technician</option>
+                            <option >Manager</option>
+                        </select><br><br>
                     <input type="submit" value="Submit" />
                 </form>
                 

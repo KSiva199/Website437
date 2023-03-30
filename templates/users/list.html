@@ -14,7 +14,7 @@
                 <div>
                {% for user in obj.data  %}
                 <tr>  
-                <td> <div> <a href="/users/manage_user?pkval={{ obj.UserID }}"> {{ user.UserID}} </a> </td>
+                <td> <div> <a href="/register?pkval={{user.UserID}}&action=manager_update"> {{ user.UserID}} </a> </td>
                     <td>{{ user.Username }} </td>  
                     <td>{{ user.UserFirstName }} </td> 
                     <td>{{ user.UserLastName }} </td> 
@@ -28,8 +28,7 @@
                 </div>
                 </table>
                 <br>
-                <p>
-                <a href="/users/redirect_user?action=manager"> Home </a> </p>
+                <a href="#"> Home </a> <br>
                 <a href="{{url_for('logout')}}" class="btn btn-info btn-lg">
-                    <span class="glyphicon glyphicon-log-out"></span> Log out </a>
+                    <span class="glyphicon glyphicon-log-out"></span></a>
 {% endblock %}

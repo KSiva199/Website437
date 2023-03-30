@@ -43,6 +43,10 @@ def register():
         pkval = request.args.get('pkval')
         u.getById(pkval)
         return render_template('/users/update.html',user=u)
+    if action is not None and action=='manager_update':
+        pkval = request.args.get('pkval')
+        u.getById(pkval)
+        return render_template('/users/updateuser_manager.html',user=u)
 
 
 @app.route('/manage_user',methods=['GET','POST'])
@@ -91,8 +95,10 @@ def manage_user():
     else:
         o.getById(pkval)
         return render_template('users/manage.html',obj = o)
+    
+    
 @app.route('/redirect_user', methods=['GET','POST'])
-def redirect():
+def redirect_user():
     u=Users()
     action = request.args.get('action')
     if action is not None and action=='manager':
@@ -105,6 +111,8 @@ def redirect():
     
 @app.route('/login_user',methods=['GET','POST'])
 def login_user():
+    #if checkSession() == False: 
+     #  return redirect('/home')
     if request.form.get('Username') is not None and request.form.get('Password') is not None:
         u = Users()
         if u.tryLogin(request.form.get('Username'),request.form.get('Password')):
@@ -130,6 +138,7 @@ def login_user():
             m = session['msg']
             session['msg'] = None
         return render_template('users/home.html', title='Login', msg=m)
+    
     
 @app.route('/logout',methods = ['GET','POST'])
 def logout():
