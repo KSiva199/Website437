@@ -19,14 +19,21 @@
                     <br>
 
                     Email:<br>
-                    <input type="text" name="Username" value="{{ user.data[0].Username}}"  readonly/>
+                    <input type="text" name="Username" value="{{ user.data[0].Username}}"/>
                     <br>
 
                     Phone Number:<br>
                     <input type="number" name="PhoneNumber" value="{{ user.data[0].PhoneNumber}}" />
                     <br>
+                    Password:<br>
+                    <input type="password" name="Password" value="{{user.data[0].Password}}" readonly/>
+                    <br>
+
+                    Retype Password:<br>
+                    <input type="password" name="ConfirmPassword" value="{{user.data[0].Password}}" readonly />
+                    <br>
                     Location:<br>
-                    <select name="LocationID" value="{{ user.data[0].LocationID}}">
+                    <select name="LocationID" value="{{user.data[0].LocationID}}">
                         <option >Please Choose</option>
                         <option >Location1</option>
                         <option >Location2</option>

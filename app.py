@@ -76,15 +76,20 @@ def manage_user():
         o=Users()
         o.getById(pkval)
         o.data[0]['UserFirstName'] = request.form.get('UserFirstName')
-        o.data[0]['UserLasttName'] = request.form.get('UserLastName')
+        o.data[0]['UserLastName'] = request.form.get('UserLastName')
         o.data[0]['Username'] = request.form.get('Username')
         o.data[0]['Password'] = request.form.get('Password')
         o.data[0]['Password2'] = request.form.get('ConfirmPassword')
         o.data[0]['PhoneNumber'] = request.form.get('PhoneNumber')
-        o.data[0]['Role'] = 'Requester'
+        o.data[0]['Role'] = request.form.get('Role')
         if o.verify_update():
             o.update()
-            return render_template('/users/requester_option.html',user=o)
+            if session['user']['Role'] == 'Manager':
+                return render_template('/users/manager_option.html', title='Main menu',user=o) 
+            elif session['user']['Role']=='Technician':
+                return render_template('/users/technician_option.html', title='Main menu',user=o)
+            else:
+                return render_template('/users/requester_option.html', title='Main menu',user=o) 
 
     if pkval is None:
         o.getAll()
@@ -100,13 +105,12 @@ def manage_user():
 @app.route('/redirect_user', methods=['GET','POST'])
 def redirect_user():
     u=Users()
-    action = request.args.get('action')
-    if action is not None and action=='manager':
-        return render_template('/users/manager_option.html', title='Main menu',user=u)
-    if action is not None and action=='technician':
+    if session['user']['Role'] == 'Manager':
+        return render_template('/users/manager_option.html', title='Main menu',user=u) 
+    elif session['user']['Role']=='Technician':
         return render_template('/users/technician_option.html', title='Main menu',user=u)
-    if action is not None and action=='requester':
-        return render_template('/users/requester_option.html', title='Main menu',user=u)
+    else:
+        return render_template('/users/requester_option.html', title='Main menu',user=u) 
 
     
 @app.route('/login_user',methods=['GET','POST'])
