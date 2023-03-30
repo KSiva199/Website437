@@ -186,11 +186,22 @@ else:
 '''
 
 
-@app.route('/list_wo')
+@app.route('/wo/list_wo',methods=['GET','POST'])
 def list_WO():
     wo = WO()
-    wo.getAll()
-    return render_template('/wo/listwo.html',wo = wo)
+    pkval = session['user']['UserID']
+    if session['user']['Role'] == 'Requester':
+        wo.getByReqID(pkval)
+        return render_template('/wo/listwo_req.html',wo=wo)
+    elif session['user']['Role'] == 'Technician':
+        wo.getByTechID(pkval)
+        return render_template('/wo/listwo_tech.html',wo=wo)
+    elif session['user']['Role'] == 'Manager':
+        wo.getAllWOs()
+        return render_template('/wo/listwo_mgr.html',wo=wo)
+    #print(wo.data)
+    
+    #return render_template('/wo/listwo.html',wo = wo)
 
 @app.route('/wo/manage',methods=['GET','POST'])
 def manage_WO():
@@ -226,7 +237,7 @@ def manage_WO():
         for key in d:
             if key in ['ProblemID','AssetID','TechnicianID'] and d[key] is not None:
                 d[key] = int(d[key])
-        print(d)
+        #print(d)
         
         wo.set(d)
         if wo.verifyNew():
@@ -251,22 +262,32 @@ def manage_WO():
             return render_template('/wo/manage.html',wo = wo)
         
     if pkval is None:
-        wo.getAll()
-        return render_template('/wo/listwo.html',wo = wo)
-    if pkval == 'new':
+        if session['user']['Role'] == 'Manager':
+            return render_template('/users/manager_option.html', title='Main menu') 
+        elif session['user']['Role']=='Technician':
+            return render_template('/users/technician_option.html', title='Main menu')
+        else:
+            return render_template('/users/requester_option.html', title='Main menu')
+        #wo.getAll()
+        #return render_template('/wo/listwo.html',wo = wo)
+    elif pkval == 'new':
         wo.createBlank()
+        if session['user']['Role'] == 'Manager':
+            return render_template('wo/addwo_mgr.html',wo=wo) 
+        elif session['user']['Role']=='Technician':
+            return render_template('wo/addwo_tech.html',wo=wo) 
+        else:
+            return render_template('wo/addwo.html',wo=wo) 
         return render_template('/wo/addwo.html',wo = wo)
     else:
         wo.getById(pkval)
-        #uR = Users()
-        #uR.getById(wo.data[0]['RequesterID'])
-        #uT = Users()
-        #uR.getById(wo.data['TechnicianID'])
-        #a = Assets()
-        #a.getById(wo.data['AssetID'])
-        #p = Problem_Codes()
-        #p.getById(wo.data['ProblemID'])
-        return render_template('wo/manage.html',wo=wo)
+        if session['user']['Role'] == 'Manager':
+            return render_template('wo/wosumm_mgr.html',wo=wo) 
+        elif session['user']['Role']=='Technician':
+            return render_template('wo/wosumm_tech.html',wo=wo) 
+        else:
+            return render_template('wo/wosumm.html',wo=wo) 
+        #return render_template('wo/manage.html',wo=wo)
 
 if __name__ == '__main__':
    app.run(host='127.0.0.1',debug=True)  

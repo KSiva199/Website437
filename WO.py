@@ -10,6 +10,27 @@ class WO(baseObject):
             l.append(s)
         return l
     
+    def getByReqID(self,id):
+        sql = f"Select * from `{self.tn}` where `RequesterID` = %s ORDER BY `WorkOrderID` DESC" 
+        self.cur.execute(sql,(id))
+        self.data = []
+        for row in self.cur:
+            self.data.append(row)
+    
+    def getByTechID(self,id):
+        sql = f"Select * from `{self.tn}` where `TechnicianID` = %s AND `Status` = 'Open' ORDER BY `WorkOrderID` DESC" 
+        self.cur.execute(sql,(id))
+        self.data = []
+        for row in self.cur:
+            self.data.append(row)
+    
+    def getAllWOs(self):
+        sql = f"Select * from `{self.tn}` ORDER BY `WorkOrderID` DESC" 
+        self.cur.execute(sql)
+        self.data = []
+        for row in self.cur:
+            self.data.append(row)
+    
     def getByWOID(self,id): #field,value
         sql = f"Select * from `{self.tn}` where `WorkOrderID` = %s" 
         self.cur.execute(sql,(id))
