@@ -261,6 +261,12 @@ def manage_WO():
         #return render_template('/wo/listwo.html',wo = wo)
     elif pkval == 'new':
         wo.createBlank()
+        if session['user']['Role'] == 'Manager':
+            return render_template('wo/addwo_mgr.html',wo=wo) 
+        elif session['user']['Role']=='Technician':
+            return render_template('wo/addwo_tech.html',wo=wo) 
+        else:
+            return render_template('wo/addwo.html',wo=wo) 
         return render_template('/wo/addwo.html',wo = wo)
     else:
         wo.getById(pkval)
