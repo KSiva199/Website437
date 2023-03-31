@@ -6,13 +6,13 @@
             <div>
 				<b>Date Entered:</b> {{ wo.data[0].RequestDate }}<br>
 				<b>Status:</b> {{ wo.data[0].Status }}<br>
-				<b>Location/Asset:</b> {{ wo.data[0].AssetID }}<br>
+				<b>Location/Asset:</b> {{ wo.data[0].AssetType }} - {{ wo.data[0].Asset }}<br>
 				<b>Reported Problem:</b> {{ wo.data[0].Issue }}<br>
-				<b>Technician:</b> {{ wo.data[0].TechnicianID }}<br>
+				<b>Technician:</b> {{ wo.data[0].TFName }} {{ wo.data[0].TLName }}<br>
 				<b>Solution:</b> {{ wo.data[0].Solution }}<br><br>
 
-				<a href="/wo/listmsgs"><b>View Work Order Messages</b></a> &nbsp &nbsp
+				<a href="/wo/listmsgs"><b>View/Add Work Order Messages</b></a> &nbsp &nbsp
 				<a href="/wo/list_wo"><b>Return to Work Order List</b></a>&nbsp &nbsp
-				<a href="/wo/manage">Return to Main Menu</a><br>
+				<a href="/main_manu">Return to Main Menu</a><br><br>
 			</div>
 {% endblock %}

@@ -5,11 +5,12 @@
 <h3> Summary of Work Order #{{ wo.data[0].WorkOrderID }}</h3>
             <div>
 				<b>Date Entered:</b> {{ wo.data[0].RequestDate }}<br>
-				<b>Location/Asset:</b> {{ wo.data[0].AssetID }}<br>
+				<b>Requester:</b> {{ wo.data[0].RFName }} {{ wo.data[0].RLName }}<br>
+				<b>Location/Asset:</b> {{ wo.data[0].Asset}} - {{ wo.data[0].AssetType}}<br>
 				<b>Reported Problem:</b> {{ wo.data[0].Issue }}<br>
-				<b>Technician:</b> {{ wo.data[0].TechnicianID }}<br>
+				<b>Technician:</b> {{ wo.data[0].TFName}} {{ wo.data[0].TFName}}<br>
 				<b>Status:</b> {{ wo.data[0].Status }}<br>
-				<b>Problem Code:</b> {{ wo.data[0].ProblemID }}<br>
+				<b>Problem Code:</b> {{ wo.data[0].PCode }} - {{ wo.data[0].ProblemDesc }}<br>
 				<b>Hours Spent:</b> {{ wo.data[0].LaborHours }}<br>
 				<b>Solution:</b> {{ wo.data[0].Solution }}<br>
 
@@ -18,6 +19,6 @@
 				<div title="Close Work Order">Close Work Order</div>
 				<br>
 				<a href="/wo/list_wo"><b>Return to Work Order List</b></a>&nbsp &nbsp
-				<a href="/wo/manage">Return to Main Menu</a><br>
+				<a href="/main_menu">Return to Main Menu</a><br>
 			</div>
 {% endblock %}
