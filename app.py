@@ -43,6 +43,10 @@ def register():
         pkval = request.args.get('pkval')
         u.getById(pkval)
         return render_template('/users/update.html',user=u)
+    if action is not None and action=='manager_update':
+        pkval = request.args.get('pkval')
+        u.getById(pkval)
+        return render_template('/users/updateuser_manager.html',user=u)
 
 
 @app.route('/manage_user',methods=['GET','POST'])
@@ -72,15 +76,20 @@ def manage_user():
         o=Users()
         o.getById(pkval)
         o.data[0]['UserFirstName'] = request.form.get('UserFirstName')
-        o.data[0]['UserLasttName'] = request.form.get('UserLastName')
+        o.data[0]['UserLastName'] = request.form.get('UserLastName')
         o.data[0]['Username'] = request.form.get('Username')
         o.data[0]['Password'] = request.form.get('Password')
         o.data[0]['Password2'] = request.form.get('ConfirmPassword')
         o.data[0]['PhoneNumber'] = request.form.get('PhoneNumber')
-        o.data[0]['Role'] = 'Requester'
+        o.data[0]['Role'] = request.form.get('Role')
         if o.verify_update():
             o.update()
-            return render_template('/users/requester_option.html',user=o)
+            if session['user']['Role'] == 'Manager':
+                return render_template('/users/manager_option.html', title='Main menu',user=o) 
+            elif session['user']['Role']=='Technician':
+                return render_template('/users/technician_option.html', title='Main menu',user=o)
+            else:
+                return render_template('/users/requester_option.html', title='Main menu',user=o) 
 
     if pkval is None:
         o.getAll()
@@ -92,8 +101,22 @@ def manage_user():
         o.getById(pkval)
         return render_template('users/manage.html',obj = o)
     
+    
+@app.route('/redirect_user', methods=['GET','POST'])
+def redirect_user():
+    u=Users()
+    if session['user']['Role'] == 'Manager':
+        return render_template('/users/manager_option.html', title='Main menu',user=u) 
+    elif session['user']['Role']=='Technician':
+        return render_template('/users/technician_option.html', title='Main menu',user=u)
+    else:
+        return render_template('/users/requester_option.html', title='Main menu',user=u) 
+
+    
 @app.route('/login_user',methods=['GET','POST'])
 def login_user():
+    #if checkSession() == False: 
+     #  return redirect('/home')
     if request.form.get('Username') is not None and request.form.get('Password') is not None:
         u = Users()
         if u.tryLogin(request.form.get('Username'),request.form.get('Password')):
@@ -119,6 +142,7 @@ def login_user():
             m = session['msg']
             session['msg'] = None
         return render_template('users/home.html', title='Login', msg=m)
+    
     
 @app.route('/logout',methods = ['GET','POST'])
 def logout():
