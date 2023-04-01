@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+            <div>
+                <form action="manage_asset?pkval={{ obj.data[0].AssetID }}&action=update" method="POST">
+                    AssetID:<br>
+                    <input type="text" name="AssetID" value="{{ obj.data[0].AssetID }}" />
+                    <br>
+
+                    Parent Asset:<br>
+                    <input type="text" name="ParentAsset" value="{{ obj.data[0].ParentAsset }}" />
+                    <br>
+
+                    Asset Tag:<br>
+                    <input type="text" name="AssetTag" value="{{ obj.data[0].AssetTag }}" />
+                    <br>
+
+                    Asset Type:<br>
+                    <input type="text" name="AssetType" value="{{obj.data[0].AssetType}}" />
+                    <br>
+                    <br>
+                    <input type="submit" value="Submit" />
+                </form>
+                
+            </div>
+{% endblock %}

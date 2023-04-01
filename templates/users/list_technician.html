@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+                <table>
+                    <tr>
+                        <th> User ID </th>
+                        <th> Username </th>
+                        <th> User First Name </th>
+                        <th> User Last Name</th>
+                        <th> Role </th>
+                        <th> Phone Number </th>
+                    </tr>
+                <div>
+               {% for user in obj.data  %}
+                <tr>  
+                <td> <div> <a href="/register?pkval={{user.UserID}}&action=manager_update"> {{ user.UserID}} </a> </td>
+                    <td>{{ user.Username }} </td>  
+                    <td>{{ user.UserFirstName }} </td> 
+                    <td>{{ user.UserLastName }} </td> 
+                    <td>{{ user.Role }} </td>
+                    <td>{{ user.PhoneNumber }} </td> 
+                </div></td>
+                </tr>
+                
+				{% endfor %}
+                
+                </div>
+                </table>
+                <br>
+                <a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br>
+                <a href="{{url_for('logout')}}" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-log-out"></span></a>
+{% endblock %}

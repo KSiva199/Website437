@@ -175,6 +175,65 @@ def list_users():
     u.getAll()
     return render_template('/users/list.html',obj = u)
 
+@app.route('/list_technician')
+def list_technician():
+    u = Users()
+    u.getByField('Role','Technician')
+    return render_template('/users/list_technician.html',obj = u)
+
+@app.route('/list_assets')
+def list_assets():
+    u = Assets()
+    u.getAll()
+    return render_template('/assets/list_all_assets.html',obj = u)
+
+@app.route('/register_asset')
+def register_asset():
+    u =Assets()
+    action = request.args.get('action')
+    if action is not None and action=='new':
+        return render_template('/assets/add.html',obj=u)
+    if action is not None and action=='update':
+        pkval = request.args.get('pkval')
+        u.getById(pkval)
+        return render_template('/assets/manage.html',obj=u)
+
+
+@app.route('/manage_asset',methods=['GET','POST'])
+def manage_asset():
+    #if checkSession() == False or session['user']['role'] != 'Requester': 
+    #    return redirect('/home')
+    action = request.args.get('action')
+    pkval = request.args.get('pkval')
+    if action is not None and action=='new':
+        o=Assets()
+        d = {}
+        d['AssetID'] = request.form.get('AssetID')
+        d['ParentAsset'] = request.form.get('ParentAsset')
+        d['AssetTag'] = request.form.get('AssetTag')
+        d['AssetType'] = request.form.get('AssetType')
+        o.set(d)
+        o.insert()
+        return render_template('/users/manager_option.html',msg='Asset Added')
+    if action is not None and action=='update':
+        o=Assets()
+        o.getById(pkval)
+        o.data[0]['ParentAsset'] = request.form.get('ParentAsset')
+        o.data[0]['AssetTag'] = request.form.get('AssetTag')
+        o.data[0]['AssetType'] = request.form.get('AssetType')
+        o.update()   
+        return render_template('/users/manager_option.html',msg='Asset Updated')   
+
+    if pkval is None:
+        o.getAll()
+        return render_template('users/list.html',objs = o)
+    if pkval == 'new':
+        o.createBlank()
+        return render_template('assets/add.html',obj = o)
+    else:
+        o.getById(pkval)
+        return render_template('users/manage.html',obj = o)
+
 @app.route('/update_user', methods=['GET','POST'])
 def update_user():
     o=Users()
