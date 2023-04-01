@@ -121,7 +121,7 @@ def login_user():
         u = Users()
         if u.tryLogin(request.form.get('Username'),request.form.get('Password')):
             u.getById(u.data[0]['UserID'])
-            print(u.data)
+            #print(u.data)
             print('login ok')
             session['user'] = u.data[0]
             session['active'] = time.time()
@@ -256,7 +256,14 @@ else:
     o.getById(pkval)
     return render_template('users/manage.html',obj = o)
 '''
-
+@app.route('/main_menu')
+def main_menu():
+    if session['user']['Role'] == 'Manager':
+        return render_template('/users/manager_option.html', title='Main Menu') 
+    elif session['user']['Role']=='Technician':
+        return render_template('/users/technician_option.html', title='Main Menu')
+    else:
+        return render_template('/users/requester_option.html', title='Main Menu')
 
 @app.route('/wo/list_wo',methods=['GET','POST'])
 def list_WO():
@@ -271,7 +278,6 @@ def list_WO():
     elif session['user']['Role'] == 'Manager':
         wo.getAllWOs()
         return render_template('/wo/listwo_mgr.html',wo=wo)
-    #print(wo.data)
     
     #return render_template('/wo/listwo.html',wo = wo)
 
@@ -310,7 +316,6 @@ def manage_WO():
             if key in ['ProblemID','AssetID','TechnicianID'] and d[key] is not None:
                 d[key] = int(d[key])
         #print(d)
-        
         wo.set(d)
         if wo.verifyNew():
             wo.insert()
@@ -335,11 +340,11 @@ def manage_WO():
         
     if pkval is None:
         if session['user']['Role'] == 'Manager':
-            return render_template('/users/manager_option.html', title='Main menu') 
+            return render_template('/users/manager_option.html', title='Main Menu') 
         elif session['user']['Role']=='Technician':
-            return render_template('/users/technician_option.html', title='Main menu')
+            return render_template('/users/technician_option.html', title='Main Menu')
         else:
-            return render_template('/users/requester_option.html', title='Main menu')
+            return render_template('/users/requester_option.html', title='Main Menu')
         #wo.getAll()
         #return render_template('/wo/listwo.html',wo = wo)
     elif pkval == 'new':
@@ -353,6 +358,7 @@ def manage_WO():
         return render_template('/wo/addwo.html',wo = wo)
     else:
         wo.getById(pkval)
+        wo.getWOFKs(pkval)
         if session['user']['Role'] == 'Manager':
             return render_template('wo/wosumm_mgr.html',wo=wo) 
         elif session['user']['Role']=='Technician':

@@ -3,15 +3,26 @@
 {% block content %}
 <h1 style="background-color:powderblue;">Work Order List</h1>
 <h3> Work Orders Requested by {{me.UserFirstName}} {{me.UserLastName}} </h3>
-WO# | Date | Issue | Status | Asset 
-       <br>
-            <div>
-                {% for obj in wo.data  %}
-					<div> 
-                    <a href="/wo/manage?pkval={{ obj.WorkOrderID }}">{{ obj.WorkOrderID }}</a> | {{ obj.RequestDate }} |
-                    {{ obj.Issue }} || {{ obj.Status }} || {{ obj.AssetID }}
-                    </div>
-				{% endfor %}
-                <a href="/wo/manage?pkval=new">Create New Work Order</a> &nbsp &nbsp   <a href="/wo/manage">Return to Main Menu</a><br>
-            </div>
+
+    <table>
+        <tr>
+            <th> Work Order #</th>
+            <th> Requested Date </th>
+            <th> Issue </th>
+            <th> Status</th>
+        </tr>
+        <div>
+        {% for obj in wo.data  %}
+        <tr>  
+        <td> <div> <a href="/wo/manage?pkval={{ obj.WorkOrderID }}"> {{ obj.WorkOrderID }} </a> </td>
+            <td>{{ obj.RequestDate }} </td>  
+            <td>{{ obj.Issue }} </td> 
+            <td>{{ obj.Status }} </td> 
+        </div></td>
+        </tr>
+        {% endfor %}
+        </div>
+        </table><br>
+        <a href="/wo/manage?pkval=new">Create New Work Order</a> &nbsp &nbsp   <a href="/main_menu">Return to Main Menu</a><br>
+    </div>
 {% endblock %}
