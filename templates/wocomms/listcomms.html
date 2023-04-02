@@ -1,14 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <br><b>Communications for Work Order # {{ WorkOrderID }}</b><br>
-        Date | Message | User  <br>
+<h1 style="background-color:powderblue;">Work Order Message List</h1>
+        <br><b>Communications for Work Order #{{ comm.data[0].WkOrdID }}</b><br>
+        <table>
+            <tr>
+                <th> Message Date </th>
+                <th> Message </th>
+                <th> From </th>            
+            </tr>
             <div>
-                {% for obj in wo.data  %}
-					<div> 
-                    <a href="/wo/msgs?pkval={{ WorkOrderID }}"></a>{{ CommDate }}</a> | {{ Message }} |
-                    {{ UserID }} 
-                    </div>
-				{% endfor %}
+            {% for obj in comm.data  %}
+            <tr>  
+                <td>{{ comm.data[0].CommDate }} </td>
+                <td>{{ comm.data[0].Message }} </td>
+                <td>{{ comm.data[0].FName }} {{ comm.data[0].LName }}</td>
+            </div></td>
+            </tr>
+            {% endfor %}
+        </div>
+        </table><br>
+            <br>
+            Add a Message &nbsp &nbsp
+            <a href="/wo/list_wo"><b>Return to Work Order List</b></a>&nbsp &nbsp <a href="/main_menu">Return to Main Menu</a><br><br>
             </div>
 {% endblock %}
+<br>
+<br>
