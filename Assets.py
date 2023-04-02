@@ -2,7 +2,7 @@ from baseObject import baseObject
 
 class Assets(baseObject):
     def __init__(self):
-        self.setup('ASSETS')
+        self.setup('Assets')
     def toList(self):
         l = []
         for row in self.data:
