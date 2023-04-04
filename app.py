@@ -8,7 +8,7 @@ from Users import Users
 from WO import WO
 from Assets import Assets
 from Problem_Codes import Problem_Codes
-from WO_Communication import WO_Communication
+from WOComm import WOComm
 import time
 
 #create Flask app instance
@@ -369,6 +369,16 @@ def manage_WO():
         else:
             return render_template('wo/wosumm.html',wo=wo) 
         #return render_template('wo/manage.html',wo=wo)
+
+@app.route('/wocomms/list_comms',methods=['GET','POST'])
+def list_comms():
+    comm = WOComm()
+    action = request.args.get('action')
+    woid =  request.args.get('woid')
+
+    if woid is not None:
+        comm.getCommsByWOID(woid)
+        return render_template('/wocomms/listcomms.html', comm = comm)
 
 if __name__ == '__main__':
    app.run(host='127.0.0.1',debug=True)  
