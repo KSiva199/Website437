@@ -306,7 +306,7 @@ def manage_WO():
         for p in possEmpty:
             if d[p] is None:
                 if p == 'RequestDate':
-                    d[p] = datetime.now()
+                    d[p] = datetime.now().date()
                 elif p == 'Status':
                     d[p] = 'Open'
                 elif p == 'RequesterID':
@@ -355,7 +355,7 @@ def manage_WO():
             return render_template('wo/addwo_tech.html',wo=wo) 
         else:
             return render_template('wo/addwo.html',wo=wo) 
-        return render_template('/wo/addwo.html',wo = wo)
+        #return render_template('/wo/addwo.html',wo = wo)
     else:
         wo.getById(pkval)
         wo.getWOFKs(pkval)
@@ -367,15 +367,54 @@ def manage_WO():
             return render_template('wo/wosumm.html',wo=wo) 
         #return render_template('wo/manage.html',wo=wo)
 
+@app.route('/wocomms/manage_comm',methods=['GET','POST'])
+def manage_comm():
+    o = WOComm()
+    action = request.args.get('action')
+    pkval = request.args.get('pkval')
+
+    if action is not None and action == 'insert':
+        d = {}
+        d['Message'] = request.form.get('Message')
+        d['CommDate'] = datetime.now().date()
+        d['MsgUserID'] = session['user']['UserID']
+        d['WkOrdID'] = session['user']['WO']
+        
+        o.set(d)
+        if o.verifyNew():
+            o.insert()
+            o.getCommsByWOID(int(session['user']['WO']))
+            return render_template('/wocomms/listcomms.html', comm = o)
+        else:
+            return render_template('wocomms/addcomm.html',obj = o)
+    
+    if pkval is None:
+        if session['user']['Role'] == 'Manager':
+            return render_template('/users/manager_option.html',msg="No Work Order Selected.") 
+        elif session['user']['Role']=='Technician':
+            return render_template('/users/technician_option.html',msg="No Work Order Selected.") 
+        else:
+            return render_template('/users/requester_option.html',msg="No Work Order Selected.") 
+    if pkval == 'new':
+        o.createBlank()
+        return render_template('wocomms/addcomm.html',obj = o)
+
 @app.route('/wocomms/list_comms',methods=['GET','POST'])
 def list_comms():
     comm = WOComm()
-    action = request.args.get('action')
-    woid =  request.args.get('woid')
+    pkval = request.args.get('pkval')
+    session['user']['WO'] = pkval
 
-    if woid is not None:
-        comm.getCommsByWOID(woid)
-        return render_template('/wocomms/listcomms.html', comm = comm)
+    if pkval is not None:
+        comm.getCommsByWOID(pkval)
+        print(comm.data)
+        if comm.data:
+            return render_template('/wocomms/listcomms.html', comm = comm)
+        else:
+            wkid = {}
+            wkid['WkOrdID'] = pkval
+            comm.data.append(wkid)
+            return render_template('/wocomms/listcomms_emp.html', comm = comm)
 
 if __name__ == '__main__':
    app.run(host='127.0.0.1',debug=True)  

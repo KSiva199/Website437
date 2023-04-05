@@ -14,7 +14,7 @@
 				<b>Hours Spent:</b> {{ wo.data[0].LaborHours }}<br>
 				<b>Solution:</b> {{ wo.data[0].Solution }}<br>
 
-				<a href="/wo/listmsgs"><b>View Work Order Messages</b></a> &nbsp &nbsp<br><br>
+				<a href="/wocomms/list_comms?pkval={{ wo.data[0].WorkOrderID }}"><b>Work Order Messages</b></a> &nbsp &nbsp<br><br>
 				<div title="Assign Tech or Problem ID">Edit Details</div>
 				<div title="Close Work Order">Close Work Order</div>
 				<br>

@@ -11,6 +11,7 @@
             <th> Asset </th>
             <th> Issue </th>            
             <th> Status</th>
+            <th> Technician</th>
         </tr>
         <div>
         {% for obj in wo.data  %}
@@ -20,7 +21,8 @@
             <td>{{ obj.RFName }} {{ obj.RLName }}</td> 
             <td>{{ obj.Asset }} </td>
             <td>{{ obj.Issue }} </td>
-            <td>{{ obj.Status }} </td> 
+            <td>{{ obj.Status }} </td>
+            <td>{{ obj.TFName }} {{ obj.TLName }}</td>  
         </div></td>
         </tr>
         {% endfor %}
