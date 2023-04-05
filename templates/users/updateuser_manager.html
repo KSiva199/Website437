@@ -9,7 +9,7 @@
                 {% endif %}
             </div>
             <div>
-                <form action="manage_user?pkval={{user.data[0].UserID}}&action=update" method="POST">
+                <form action="manage_user?action=update&pkval={{user.data[0].UserID}}" method="POST">
                     First Name:<br>
                     <input type="text" name="UserFirstName" value="{{ user.data[0].UserFirstName }}" />
                     <br>

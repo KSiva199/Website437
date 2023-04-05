@@ -92,8 +92,7 @@ def manage_user():
             elif session['user']['Role']=='Technician':
                 return render_template('/users/technician_option.html', title='Main menu',user=o)
             else:
-                return render_template('/users/requester_option.html', title='Main menu',user=o) 
-
+                return render_template('/users/requester_option.html', title='Main menu',user=o)  
     if pkval is None:
         o.getAll()
         return render_template('users/list.html',objs = o)
