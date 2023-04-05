@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style="background-color:powderblue;">Add a Work Order Message</h1>
+            <div style="color:red;">
+                {% if obj.errors|length > 0 %}
+                    {% for error in obj.errors  %}
+                        <div>{{ error }}</div>
+                    {% endfor %}
+				{% endif %}
+            </div>
+            <div>
+                <form action="/wocomms/manage_comm?action=insert" method="POST">
+                    Message:<br>
+                    <textarea id="AddMessage" name="Message" rows="4" cols="50" placeholder="Enter message here"></textarea><br>
+                    <br>
+                    <button type ="submit" value = "Submit" > Submit</button> &nbsp &nbsp 
+                    <a href="/wocomms/manage_comm">Return to Main Menu</a><br>
+                </form>
+                
+            </div>
+{% endblock %}
