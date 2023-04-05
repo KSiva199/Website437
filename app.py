@@ -51,8 +51,8 @@ def register():
 
 @app.route('/manage_user',methods=['GET','POST'])
 def manage_user():
-    #if checkSession() == False or session['user']['role'] != 'Requester': 
-    #    return redirect('/home')
+    #if checkSession() == False: 
+    #    return render_template('/users/home.html', msg='Session Failed')
     action = request.args.get('action')
     pkval = request.args.get('pkval')
     if action is not None and action=='new':
@@ -62,9 +62,10 @@ def manage_user():
         d['UserLastName'] = request.form.get('UserLastName')
         d['Username'] = request.form.get('Username')
         d['Password'] = request.form.get('Password')
-        d['Password2']= request.form.get('ConfirmPassword')
+        d['Password2'] = request.form.get('ConfirmPassword')
         d['PhoneNumber'] = request.form.get('PhoneNumber')
         d['LocationID'] = request.form.get('LocationID')
+        d['Shop'] = 'None'
         d['Role'] = 'Requester'
         o.set(d)
         if o.verify_new()==True:
@@ -81,7 +82,9 @@ def manage_user():
         o.data[0]['Password'] = request.form.get('Password')
         o.data[0]['Password2'] = request.form.get('ConfirmPassword')
         o.data[0]['PhoneNumber'] = request.form.get('PhoneNumber')
-        o.data[0]['Role'] = request.form.get('Role')
+        if session['user']['Role'] == 'Manager':
+            o.data[0]['Role'] = request.form.get('Role')
+            o.data[0]['Shop'] = request.form.get('Shop')
         if o.verify_update():
             o.update()
             if session['user']['Role'] == 'Manager':
@@ -116,7 +119,7 @@ def redirect_user():
 @app.route('/login_user',methods=['GET','POST'])
 def login_user():
     #if checkSession() == False: 
-     #  return redirect('/home')
+    #  return redirect('/home')
     if request.form.get('Username') is not None and request.form.get('Password') is not None:
         u = Users()
         if u.tryLogin(request.form.get('Username'),request.form.get('Password')):
