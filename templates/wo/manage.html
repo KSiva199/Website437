@@ -1,35 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h1 style="background-color:powderblue;">Work Order Summary</h1>
+<h3> Summary of Work Order #{{ wo.data[0].WorkOrderID }}</h3>
+<i>To issue a new work order to a technician, update the Technician, Shop and Problem ID fields.<br>
+   To close a work order, enter a solution, add labor hours, and change the status to Closed.<br>
+   Update other details as necessary.</i><br><br>
             <div>
-                <form action="/wo/manage?pkval={{ wo.data[0].id }}&action=update" method="POST">
-                    <b>Work Order ID: {{ wo.data[0].WorkOrderID }}</b><br>
-                    Reported Issue:<br>
+            <div>
+                <form action="/wo/manage?pkval={{ wo.data[0].WorkOrderID }}&action=update" method="POST">
+                    <b>Date Entered:</b> {{ wo.data[0].RequestDate }}<br>
+                    <b>Requester:</b><br>
+                    <input type="text" name="RequesterID" value="{{ wo.data[0].RequesterID }}" /><br>
+                    <b>Reported Issue:</b><br>
                     <input type="text" size=100 name="Issue" value="{{ wo.data[0].Issue }}" />
                     <br>
-                    Requester:<br>
-                    <input type="text" name="RequesterID" value="{{ wo.data[0].RequesterID }}" />
-                    <br>
-                    Location/Asset:<br>
+                    <b>Location/Asset:</b><br>
                     <input type="text" name="AssetID" value="{{ wo.data[0].AssetID }}" />
                     <br>
-                    Work Order Status:<br>
+                    <b>Work Order Status:</b><br>
                     <input type="text" name="Status" value="{{ wo.data[0].Status }}" />
                     <br>
-                    Assigned Technician:<br>
+                    <b>Assigned Technician:</b><br>
                     <input type="text" name="TechnicianID" value="{{ wo.data[0].TechnicianID }}" />
                     <br>
-                    Facilities Shop:<br>
+                    <b>Facilities Shop:</b><br>
                     <input type="text" name="Shop" value="{{ wo.data[0].Shop }}" />
                     <br>
-                    Solution:<br>
+                    <b>Problem Code:</b><br>
+                    <input type="text" name="ProblemID" value="{{ wo.data[0].ProblemID }}" />
+                    <br>
+                    <b>Solution:</b><br>
                     <input type="text" name="Solution" value="{{ wo.data[0].Solution }}" />
                     <br>
-                    Labor Hours:<br>
+                    <b>Labor Hours:</b><br>
                     <input type="text" name="LaborHours" value="{{ wo.data[0].LaborHours }}" />
                     <br>
                     <br>
-                    <input type="submit" value="Submit" />
+                    <input type="submit" value="Submit" /> &nbsp &nbsp <a href="/wocomms/list_comms?pkval={{ wo.data[0].WorkOrderID }}"><b>Review/Add Work Order Messages</b></a>
                 </form>
                 
             </div>
