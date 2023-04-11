@@ -334,11 +334,13 @@ def manage_WO():
         wo.data[0]['ProblemID'] = request.form.get('ProblemID')
         wo.data[0]['AssetID'] = request.form.get('AssetID')
         wo.data[0]['TechnicianID'] = request.form.get('TechnicianID')
-        wo.set(d)
         if wo.verifyUpdt():
             wo.update()
+            if session['user']['Role'] == 'Manager':
+                wo.getAllWOs()
+                return render_template('/wo/listwo_mgr.html',msg= "Work Order Updated.",wo=wo)
         else:
-            return render_template('/wo/manage.html',wo = wo)
+            return render_template('/wo/manage.html',msg= "User NOT added.",wo=wo)
         
     if pkval is None:
         if session['user']['Role'] == 'Manager':
@@ -362,7 +364,7 @@ def manage_WO():
         wo.getById(pkval)
         wo.getWOFKs(pkval)
         if session['user']['Role'] == 'Manager':
-            return render_template('wo/wosumm_mgr.html',wo=wo) 
+            return render_template('wo/manage.html',wo=wo) 
         elif session['user']['Role']=='Technician':
             return render_template('wo/wosumm_tech.html',wo=wo) 
         else:
