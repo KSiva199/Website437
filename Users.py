@@ -74,4 +74,11 @@ class Users(baseObject):
         else:
             return False
     
-    
+    def dropDownList(self):
+        choices = []
+        for item in self.data:
+            d = {}
+            d['value'] = item[self.pk]
+            d['text'] = f"{item['UserFirstName']} {item['UserLastName']}"
+            choices.append(d)
+        return choices

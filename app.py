@@ -286,6 +286,20 @@ def list_WO():
 @app.route('/wo/manage',methods=['GET','POST'])
 def manage_WO():
     wo = WO()
+    u = Users()
+    u.getByField('Role','Requester')
+    wo.RID = u.dropDownList()
+    a = Assets()
+    a.getAll()
+    wo.AID = a.dropDownList()
+    t = Users()
+    t.getByField('Role','Technician')
+    wo.TID= t.dropDownList()
+    p = Problem_Codes()
+    p.getAll()
+    wo.PID = p.dropDownList()
+
+    
     action = request.args.get('action')
     pkval = request.args.get('pkval')
     if action is not None and action == 'insert':
@@ -341,7 +355,22 @@ def manage_WO():
                 return render_template('/wo/listwo_mgr.html',msg= "Work Order Updated.",wo=wo)
         else:
             return render_template('/wo/manage.html',msg= "User NOT added.",wo=wo)
-        
+    if action is not None and action == 'alter':
+        wo.getById(pkval)
+        wo.data[0]['Status'] = request.form.get('Status')
+        wo.data[0]['LaborHours'] = request.form.get('LaborHours')
+        wo.data[0]['Solution'] = request.form.get('Solution')
+        wo.data[0]['ProblemID'] = request.form.get('ProblemID')
+        wo.data[0]['AssetID'] = request.form.get('AssetID')
+        if wo.verifyUpdt():
+            wo.update()
+            if session['user']['Role'] == 'Technician':
+                wo.getAllWOs()
+                return render_template('/wo/listwo_tech.html',msg= "Work Order Updated.",wo=wo)
+        else:
+            return render_template('/wo/manage.html',msg= "User NOT added.",wo=wo)
+
+
     if pkval is None:
         if session['user']['Role'] == 'Manager':
             return render_template('/users/manager_option.html', title='Main Menu') 
@@ -355,8 +384,6 @@ def manage_WO():
         wo.createBlank()
         if session['user']['Role'] == 'Manager':
             return render_template('wo/addwo_mgr.html',wo=wo) 
-        elif session['user']['Role']=='Technician':
-            return render_template('wo/addwo_tech.html',wo=wo) 
         else:
             return render_template('wo/addwo.html',wo=wo) 
         #return render_template('/wo/addwo.html',wo = wo)

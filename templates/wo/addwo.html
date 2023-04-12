@@ -11,7 +11,13 @@
             </div>
             <div> <form method="POST" action="manage?action=insert">
                     Where is the problem? Or what item has a problem?<br>
-                    Location/Asset: <input type="text" name="AssetID" required/>
+                    Location/Asset:
+                    <select name="AssetID">
+                        {% for fo in wo.AID %}
+                            <option value="{{ fo.value }}">{{ fo.text }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
                     <br>
                     Problem/Issue:<br>
                     <textarea id="addwoiss" name="Issue" rows="4" cols="50" placeholder="Enter description of problem"></textarea><br>
