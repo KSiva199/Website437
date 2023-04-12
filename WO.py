@@ -78,6 +78,15 @@ class WO(baseObject):
                             self.data[0][key] = value
         #print(self.data)
     
+    def dropDownList(self):
+        choices = []
+        for item in self.data:
+            d = {}
+            d['value'] = item[self.pk]
+            d['text'] = f"{item['self.pk']}: ({item['RequestDate']}, {item['Issue'][:20]})"
+            choices.append(d)
+        return choices
+    
     def verifyNew(self,n=0):
         if len(self.data[n]['Issue']) <= 10: 
             self.errors.append('Problem/Issue must be longer than 10 characters')

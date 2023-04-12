@@ -5,13 +5,37 @@
 <h3> Create a Work Order #{{ wo.data[0].WorkOrderID }}</h3>
             <div>
                 <form method="POST" action="manage_wo">
-                    Requester: <input type="text" name="RequesterID" required/><br>
-                    Location/Asset: <input type="text" name="AssetID" required/><br>                    
+                    Requester:
+                    <select name="RequesterID">
+                        {% for fo in wo.RID %}
+                            <option value="{{ fo.value }}">{{ fo.text }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    Location/Asset:
+                    <select name="AssetID">
+                        {% for fo in wo.AID %}
+                            <option value="{{ fo.value }}">{{ fo.text }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>                    
                     Problem/Issue:<br>
                     <textarea id="addwoiss" name="Issue" rows="4" cols="50">
                     </textarea><br>
-                    Technician: <input type="text" name="TechnicianID" required/><br>
-                    Problem Code: <input type="text" name="ProblemID" required/><br> <br> 
+                    Technician:
+                    <select name="TechnicianID">
+                        {% for fo in wo.TID %}
+                            <option value="{{ fo.value }}">{{ fo.text }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    Problem Code:
+                    <select name="ProblemID">
+                        {% for fo in wo.PID %}
+                            <option value="{{ fo.value }}">{{ fo.text }}</option>
+                        {% endfor %}
+                    </select>
+                    <br><br> 
                     <!-- Need a Submit button-->
                     <button type ="submit" value = "Submit" > Submit</button>
                     <!-- Click to reset fields -->  

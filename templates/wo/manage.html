@@ -3,32 +3,75 @@
 {% block content %}
 <h1 style="background-color:powderblue;">Work Order Summary</h1>
 <h3> Summary of Work Order #{{ wo.data[0].WorkOrderID }}</h3>
-<i>To issue a new work order to a technician, update the Technician, Shop and Problem ID fields.<br>
-   To close a work order, enter a solution, add labor hours, and change the status to Closed.<br>
+<i>To close a work order, enter a solution, add labor hours, and change the status to Complete.<br>
    Update other details as necessary.</i><br><br>
-            <div>
             <div>
                 <form action="/wo/manage?pkval={{ wo.data[0].WorkOrderID }}&action=update" method="POST">
                     <b>Date Entered:</b> {{ wo.data[0].RequestDate }}<br>
                     <b>Requester:</b><br>
-                    <input type="text" name="RequesterID" value="{{ wo.data[0].RequesterID }}" /><br>
+                    <select name="RequesterID">
+                        {% for fo in wo.RID %}
+                            {% if  wo.data[0].RequesterID == fo.value %}
+                                <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% else %}
+                                <option value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <br>
                     <b>Reported Issue:</b><br>
                     <input type="text" size=100 name="Issue" value="{{ wo.data[0].Issue }}" />
                     <br>
                     <b>Location/Asset:</b><br>
-                    <input type="text" name="AssetID" value="{{ wo.data[0].AssetID }}" />
+                    <select name="AssetID">
+                        {% for fo in wo.AID %}
+                            {% if  wo.data[0].AssetID == fo.value %}
+                                <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% else %}
+                                <option value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                     <br>
                     <b>Work Order Status:</b><br>
-                    <input type="text" name="Status" value="{{ wo.data[0].Status }}" />
-                    <br>
+                    <select name="Status">
+						<option value="Open"{% if wo.data[0].Status=='Open' %} selected="selected"{% endif %}>Open</option>
+                        <option value="On-Hold"{% if wo.data[0].Status=="On-Hold" %} selected="selected"{% endif %}>On-Hold</option>
+                        <option value="Complete"{% if wo.data[0].Status=="Complete" %} selected="selected"{% endif %}>Complete</option>
+                        <option value="Canceled"{% if wo.data[0].Status=="Canceled" %} selected="selected"{% endif %}>Canceled</option>
+					</select><br>
                     <b>Assigned Technician:</b><br>
-                    <input type="text" name="TechnicianID" value="{{ wo.data[0].TechnicianID }}" />
+                    <select name="TechnicianID">
+                        {% for fo in wo.TID %}
+                            {% if  wo.data[0].TechnicianID == fo.value %}
+                                <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% else %}
+                                <option value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                     <br>
                     <b>Facilities Shop:</b><br>
-                    <input type="text" name="Shop" value="{{ wo.data[0].Shop }}" />
+                    <select name="Shop">
+						<option value="Carpentry"{% if wo.data[0].Shop=="Carpentry" %} selected="selected"{% endif %}>Carpentry</option>
+                        <option value="Electrical"{% if wo.data[0].Shop=="Electrical" %} selected="selected"{% endif %}>Electrical</option>
+                        <option value="HVAC"{% if wo.data[0].Shop=="HVAC" %} selected="selected"{% endif %}>HVAC</option>
+                        <option value="Janitorial"{% if wo.data[0].Shop=="Janitorial" %} selected="selected"{% endif %}>Janitorial</option>
+                        <option value="Locksmith"{% if wo.data[0].Shop=="Locksmith" %} selected="selected"{% endif %}>Locksmith</option>
+                        <option value="Management"{% if wo.data[0].Shop=="Management" %} selected="selected"{% endif %}>Management</option>
+                        <option value="Plumbing"{% if wo.data[0].Shop=="Plumbing" %} selected="selected"{% endif %}>Plumbing</option>
+					</select>
                     <br>
                     <b>Problem Code:</b><br>
-                    <input type="text" name="ProblemID" value="{{ wo.data[0].ProblemID }}" />
+                    <select name="ProblemID">
+                        {% for fo in wo.PID %}
+                            {% if  wo.data[0].ProblemID == fo.value %}
+                                <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% else %}
+                                <option value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                     <br>
                     <b>Solution:</b><br>
                     <input type="text" name="Solution" value="{{ wo.data[0].Solution }}" />
@@ -37,7 +80,7 @@
                     <input type="text" name="LaborHours" value="{{ wo.data[0].LaborHours }}" />
                     <br>
                     <br>
-                    <input type="submit" value="Submit" /> &nbsp &nbsp <a href="/wocomms/list_comms?pkval={{ wo.data[0].WorkOrderID }}"><b>Review/Add Work Order Messages</b></a>
+                    <input type="submit" value="Submit" /> &nbsp &nbsp <a href="/wocomms/list_comms?pkval={{ wo.data[0].WorkOrderID }}"><b>Review/Add Work Order Messages</b></a>&nbsp &nbsp <a href="/wo/list_wo"><b>Return to Work Order List</b></a<br>
                 </form>
                 
             </div>
