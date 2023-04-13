@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="/main_menu">Return to Main Menu</a><br><br>
             <div style="color:green;">
                 {% if user.errors|length > 0 %}
                     {% for error in user.errors  %}
@@ -42,9 +43,9 @@
                                 <option value="{{ fo.value }}">{{ fo.text }}</option>
                             {% endif %}
                         {% endfor %}
-                    </select>
+                    </select> <br><br>
                     
-                    <input type="submit" value="Submit" /> &nbsp &nbsp <a href="/main_menu">Return to Main Menu</a><br>
+                    <input type="submit" value="Submit" /> &nbsp &nbsp 
                 </form>
                 
             </div>

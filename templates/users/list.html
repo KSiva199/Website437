@@ -2,6 +2,10 @@
 
 {% block content %}
 <br>
+                <a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br>
+                <a href="{{url_for('logout')}}" class="btn btn-info btn-lg">
+                    <span class="glyphicon glyphicon-log-out"></span></a>
+<br>
                 <table>
                     <tr>
                         <th> User ID </th>
@@ -27,8 +31,5 @@
                 
                 </div>
                 </table>
-                <br>
-                <a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br>
-                <a href="{{url_for('logout')}}" class="btn btn-info btn-lg">
-                    <span class="glyphicon glyphicon-log-out"></span></a>
+                
 {% endblock %}

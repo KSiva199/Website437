@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="/register_asset?action=new"> Create new Asset </a> <br>
+<a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br><br>
             <div>
                 <form action="manage_asset?pkval={{ obj.data[0].AssetID }}&action=update" method="POST">
                     AssetID:<br>

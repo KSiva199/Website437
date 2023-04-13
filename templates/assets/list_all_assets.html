@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="/register_asset?action=new"> Create new Asset </a> <br>
+<a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br>
 <br>
                 <table>
                     <tr>
@@ -24,8 +26,7 @@
                 </div>
                 </table>
                 <br>
-                <a href="/register_asset?action=new"> Create new Asset </a> <br>
-                <a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br>
+                
                 <a href="{{url_for('logout')}}" class="btn btn-info btn-lg">
                     <span class="glyphicon glyphicon-log-out"></span></a>
 {% endblock %}
