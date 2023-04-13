@@ -21,6 +21,6 @@ class Assets(baseObject):
         for item in self.data:
             d = {}
             d['value'] = item[self.pk]
-            d['text'] = f"{item['ParentAsset']}-{item['AssetTag']}-({item['AssetType']})"
+            d['text'] = f"{item['AssetTag']}-({item['AssetType']})"
             choices.append(d)
         return choices

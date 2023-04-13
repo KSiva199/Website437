@@ -37,7 +37,7 @@ def home(): #view function
 def register():
     o=Assets()
     u =Users()
-    o.getAll()
+    o.getByField('ParentAsset','BHSnell')
     o.fo=o.dropDownList()
     action = request.args.get('action')
     if action is not None and action=='new':
