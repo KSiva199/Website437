@@ -36,12 +36,17 @@
                     <br>
 
                     Location:<br>
-                    <select name="LocationID">
-                        <option >Please Choose</option>
-                        <option >Location1</option>
-                        <option >Location2</option>
-                        <option >Location3</option>
-                      </select>
+                    <select name="LocationID", aria-placeholder="Select">
+                        <option value="" disabled selected>Select Your Option</option>
+                        {% for fo in obj1.fo %}
+                            {% if  obj1.data[0].AssetID == fo.value %}
+                                <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% else %}
+                                <option value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+            
 
                     <br>
                     <br>

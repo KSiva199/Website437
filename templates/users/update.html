@@ -33,13 +33,16 @@
                     <input type="number" name="PhoneNumber" value="{{ user.data[0].PhoneNumber}}" />
                     <br>
                     Location:<br>
-                    <select name="LocationID" value="{{ user.data[0].LocationID}}">
-                        <option >Please Choose</option>
-                        <option >Location1</option>
-                        <option >Location2</option>
-                        <option >Location3</option>
-                      </select>
-                    <br>
+                    <select name="LocationID">
+                        {% for fo in obj1.fo %}
+                            {% if  obj1.data[0].AssetID == fo.value %}
+                                <option value="" disabled selected>Select Your Option</option>
+                                <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% else %}
+                                <option value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                     
                     <input type="submit" value="Submit" /> &nbsp &nbsp <a href="/main_menu">Return to Main Menu</a><br>
                 </form>

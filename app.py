@@ -35,18 +35,21 @@ def home(): #view function
     
 @app.route('/register')
 def register():
+    o=Assets()
     u =Users()
+    o.getAll()
+    o.fo=o.dropDownList()
     action = request.args.get('action')
     if action is not None and action=='new':
-        return render_template('/users/add.html',obj=u)
+        return render_template('/users/add.html',obj=u,obj1=o)
     if action is not None and action=='update':
         pkval = request.args.get('pkval')
         u.getById(pkval)
-        return render_template('/users/update.html',user=u)
+        return render_template('/users/update.html',user=u,obj1=o)
     if action is not None and action=='manager_update':
         pkval = request.args.get('pkval')
         u.getById(pkval)
-        return render_template('/users/updateuser_manager.html',user=u)
+        return render_template('/users/updateuser_manager.html',user=u,obj1=o)
 
 
 @app.route('/manage_user',methods=['GET','POST'])
