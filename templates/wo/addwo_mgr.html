@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="/main_menu">Return to Main Menu</a><br>
 <h1 style="background-color:powderblue;">New Work Order</h1>
 <h3> Create a Work Order #{{ wo.data[0].WorkOrderID }}</h3>
             <div>
@@ -40,7 +41,7 @@
                     <button type ="submit" value = "Submit" > Submit</button>
                     <!-- Click to reset fields -->  
                     <button type = "reset" value = "Reset" >Reset</button> <br><br>
-                    <a href="/main_menu">Return to Main Menu</a><br>
+                    
                 </form>
             </div>
 {% endblock %}

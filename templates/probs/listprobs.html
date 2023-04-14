@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="/probs/manage?pkval=new">Create New Problem Code</a> &nbsp &nbsp   <a href="/main_menu">Return to Main Menu</a><br>
+<h1 style="background-color:powderblue;">Problem Code List</h1>
+<h3> All Problem Codes </h3>
+    <table>
+        <tr>
+            <th> Problem ID</th>
+            <th> Problem Code</th>
+            <th> Problem Description </th>
+            <th> Shop </th>
+        </tr>
+        <div>
+        {% for obj in prob.data  %}
+        <tr>  
+        <td> <div> <a href="/probs/manage?pkval={{ obj.ProblemID }}"> {{ obj.ProblemID }} </a> </td>
+            <td>{{ obj.ProblemCode }} </td>  
+            <td>{{ obj.ProblemDesc }}</td> 
+            <td>{{ obj.Shop }} </td></td>  
+        </div></td>
+        </tr>
+        {% endfor %}
+        </div>
+        </table><br>
+    </div>
+    {% endblock %}

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="/wo/manage">Return to Main Menu</a><br>
 <h1 style="background-color:powderblue;">Report a Problem</h1>
             <div style="color: red">
                 {% if wo.errors|length > 0 %}
@@ -17,7 +18,7 @@
                     <textarea id="addwoiss" name="Issue" rows="4" cols="50" placeholder="Enter description of problem"></textarea><br>
 
                     <button type ="submit" value = "Submit" > Submit</button> &nbsp &nbsp 
-                    <a href="/wo/manage">Return to Main Menu</a><br>
+                    
 
                 </form>
             </div>

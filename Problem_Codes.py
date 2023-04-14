@@ -18,3 +18,24 @@ class Problem_Codes(baseObject):
             d['text'] = f"{item['ProblemDesc']} ({item['ProblemCode']})"
             choices.append(d)
         return choices
+
+    def verifyNew(self,n=0):
+        if len(self.data[n]['Problem Desc']) <= 10: 
+            self.errors.append('Problem Description must be longer than 10 characters')
+        if len(self.data[n]['Problem Desc']) <= 5: 
+            self.errors.append('Problem Code must be longer than 5 characters')
+        if len(self.errors) > 0:
+            return False
+        else:
+            return True   
+
+    def verifyUpdt(self,n=0):
+        if len(self.data[n]['Problem Desc']) <= 10: 
+            self.errors.append('Problem Description must be longer than 10 characters')
+        if len(self.data[n]['Problem Desc']) <= 5: 
+            self.errors.append('Problem Code must be longer than 5 characters')
+
+        if len(self.errors) > 0:
+            return False
+        else:
+            return True
