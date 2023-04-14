@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="/wo/manage?pkval=new">Create New Work Order</a> &nbsp &nbsp   <a href="/main_menu">Return to Main Menu</a><br>
 <h1 style="background-color:powderblue;">Work Order List</h1>
 <h3> Work Orders Requested by {{me.UserFirstName}} {{me.UserLastName}} </h3>
 
@@ -23,6 +24,5 @@
         {% endfor %}
         </div>
         </table><br>
-        <a href="/wo/manage?pkval=new">Create New Work Order</a> &nbsp &nbsp   <a href="/main_menu">Return to Main Menu</a><br>
     </div>
 {% endblock %}

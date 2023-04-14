@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="/wocomms/manage_comm?pkval=new">Add a Message</a> &nbsp &nbsp
+            <a href="/wo/list_wo"><b>Return to Work Order List</b></a>&nbsp &nbsp <a href="/main_menu">Return to Main Menu</a><br><br>
 <h1 style="background-color:powderblue;">Work Order Message List</h1>
 <h3><b>Communications for Work Order #{{ comm.data[0].WkOrdID }}</b></h3>
         <table>
@@ -21,8 +23,7 @@
         </div>
         </table><br>
             <br>
-            <a href="/wocomms/manage_comm?pkval=new">Add a Message</a> &nbsp &nbsp
-            <a href="/wo/list_wo"><b>Return to Work Order List</b></a>&nbsp &nbsp <a href="/main_menu">Return to Main Menu</a><br><br>
+            
             </div>
 {% endblock %}
 <br>

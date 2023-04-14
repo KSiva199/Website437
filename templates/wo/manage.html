@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="/wocomms/list_comms?pkval={{ wo.data[0].WorkOrderID }}"><b>Review/Add Work Order Messages</b></a>&nbsp &nbsp <a href="/wo/list_wo"><b>Return to Work Order List</b></a><br>
 <h1 style="background-color:powderblue;">Work Order Summary</h1>
 <h3> Summary of Work Order #{{ wo.data[0].WorkOrderID }}</h3>
 <i>To close a work order, enter a solution, add labor hours, and change the status to Complete.<br>
@@ -80,7 +81,7 @@
                     <input type="text" name="LaborHours" value="{{ wo.data[0].LaborHours }}" />
                     <br>
                     <br>
-                    <input type="submit" value="Submit" /> &nbsp &nbsp <a href="/wocomms/list_comms?pkval={{ wo.data[0].WorkOrderID }}"><b>Review/Add Work Order Messages</b></a>&nbsp &nbsp <a href="/wo/list_wo"><b>Return to Work Order List</b></a<br>
+                    <input type="submit" value="Submit" /> 
                 </form>
                 
             </div>

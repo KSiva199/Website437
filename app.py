@@ -449,6 +449,48 @@ def list_comms():
             wkid['WkOrdID'] = pkval
             comm.data.append(wkid)
             return render_template('/wocomms/listcomms_emp.html', comm = comm)
+ 
+@app.route('/probs/manage',methods=['GET','POST'])
+def manage_prob():
+    #if checkSession() == False: 
+    #    return redirect('/login')
+    p = Problem_Codes()
+    action = request.args.get('action')
+    pkval = request.args.get('pkval')
+   
+    if action is not None and action == 'insert':
+        d = {}
+        d['ProblemDesc'] = request.form.get('ProblemDesc')
+        d['ProblemCode'] = request.form.get('ProblemCode')
+        d['Shop'] = request.form.get('Shop')
+        p.set(d)
+        if p.verify_new():
+            p.insert()
+            return render_template('ok_dialog.html',msg= "Problem Code added.")
+        else:
+            return render_template('probs/addprobs.html',prob = p)
+        
+    if action is not None and action == 'update':
+        p.getById(pkval)
+        p.data[0]['ProblemDesc'] = request.form.get('ProblemDesc')
+        p.data[0]['ProblemCode'] = request.form.get('ProblemCode')
+        p.data[0]['Shop'] = request.form.get('Shop')
+
+        if p.verify_update():
+            p.update()
+            return render_template('ok_dialog.html',msg= "Problem Code updated. <")
+        else:
+            return render_template('probs/manageprobs.html',prob = p)
+       
+    if pkval is None:
+        p.getAll()
+        return render_template('probs/listprobs.html',prob = p)
+    if pkval == 'new':
+        p.createBlank()
+        return render_template('probs/addprobs.html',prob = p)
+    else:
+        p.getById(pkval)
+        return render_template('probs/manageprobs.html',prob = p)
 
 if __name__ == '__main__':
-   app.run(host='127.0.0.1',debug=True)  
+   app.run(host='127.0.0.1',debug=True) 
