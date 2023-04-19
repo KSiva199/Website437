@@ -10,7 +10,7 @@ from Assets import Assets
 from Problem_Codes import Problem_Codes
 from WOComm import WOComm
 import time
-
+    
 #create Flask app instance
 app = Flask(__name__,static_url_path='')
 
@@ -251,16 +251,6 @@ def update_user():
         o.update()
         return render_template('/users/requester_option.html',user=o)
     
-'''if pkval is None:
-    o.getAll()
-    return render_template('users/list.html',objs = o)
-if pkval == 'new':
-    o.createBlank()
-    return render_template('users/add.html',obj = o)
-else:
-    o.getById(pkval)
-    return render_template('users/manage.html',obj = o)
-'''
 @app.route('/main_menu')
 def main_menu():
     if session['user']['Role'] == 'Manager':
@@ -302,7 +292,6 @@ def manage_WO():
     p.getAll()
     wo.PID = p.dropDownList()
 
-    
     action = request.args.get('action')
     pkval = request.args.get('pkval')
     if action is not None and action == 'insert':
@@ -330,16 +319,21 @@ def manage_WO():
                     d[p] = 'Open'
                 elif p == 'RequesterID':
                     d[p] = int(session['user']['UserID'])
-        
+        print(d)
         for key in d:
-            if key in ['ProblemID','AssetID','TechnicianID'] and d[key] is not None:
+            if (d[key] not in [None,'None','','0']) and (key in ['RequesterID','ProblemID','AssetID','TechnicianID']):
                 d[key] = int(d[key])
-        #print(d)
+
         wo.set(d)
         if wo.verifyNew():
             wo.insert()
         else:
-            return render_template('/wo/addwo.html',wo = wo)
+            if session['user']['Role'] == 'Manager':
+                return render_template('/wo/addwo_mgr.html',msg= "Work Order NOT Added",wo=wo)
+            elif session['user']['Role'] == 'Technician':
+                return render_template('/wo/addwo_tech.html',msg= "Work Order NOT Added",wo=wo)
+            else:
+                return render_template('/wo/addwo.html',msg= "Work Order NOT Added",wo = wo)
     if action is not None and action == 'update':
         wo.getById(pkval)
         wo.data[0]['Issue'] = request.form.get('Issue')
@@ -351,13 +345,14 @@ def manage_WO():
         wo.data[0]['ProblemID'] = request.form.get('ProblemID')
         wo.data[0]['AssetID'] = request.form.get('AssetID')
         wo.data[0]['TechnicianID'] = request.form.get('TechnicianID')
+
         if wo.verifyUpdt():
             wo.update()
             if session['user']['Role'] == 'Manager':
                 wo.getAllWOs()
                 return render_template('/wo/listwo_mgr.html',msg= "Work Order Updated.",wo=wo)
         else:
-            return render_template('/wo/manage.html',msg= "User NOT added.",wo=wo)
+            return render_template('/wo/manage.html',msg= "Work Order NOT Updated.",wo=wo)
     if action is not None and action == 'alter':
         wo.getById(pkval)
         wo.data[0]['Status'] = request.form.get('Status')
@@ -381,16 +376,16 @@ def manage_WO():
             return render_template('/users/technician_option.html', title='Main Menu')
         else:
             return render_template('/users/requester_option.html', title='Main Menu')
-        #wo.getAll()
-        #return render_template('/wo/listwo.html',wo = wo)
+
     elif pkval == 'new':
         wo.createBlank()
         if session['user']['Role'] == 'Manager':
             return render_template('wo/addwo_mgr.html',wo=wo) 
         else:
             return render_template('wo/addwo.html',wo=wo) 
-        #return render_template('/wo/addwo.html',wo = wo)
+
     else:
+        print(wo.data)
         wo.getById(pkval)
         wo.getWOFKs(pkval)
         if session['user']['Role'] == 'Manager':
