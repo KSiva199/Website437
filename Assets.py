@@ -18,9 +18,15 @@ class Assets(baseObject):
     
     def dropDownList(self):
         choices = []
+        stChc = {}
+        stChc['value'] = ''
+        stChc['text'] = "Make a Choice"
+        choices.append(stChc)
         for item in self.data:
             d = {}
             d['value'] = item[self.pk]
             d['text'] = f"{item['AssetTag']}-({item['AssetType']})"
             choices.append(d)
         return choices
+    
+    

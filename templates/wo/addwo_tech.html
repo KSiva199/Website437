@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="/wo/manage">Return to Main Menu</a><br>
+<a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br>
+<!--<a href="/wo/manage">Return to Main Menu</a><br>-->
 <h1 style="background-color:powderblue;">Report a Problem</h1>
             <div style="color: red">
                 {% if wo.errors|length > 0 %}

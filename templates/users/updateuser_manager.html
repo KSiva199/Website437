@@ -35,7 +35,7 @@
                     <br>
                     Location:<br>
                     <select name="LocationID", aria-placeholder="Select">
-                        <option value="" disabled selected>Select Your Option</option>
+                        <!--<option value="" disabled selected>Select Your Option</option>-->
                         {% for fo in obj1.fo %}
                             {% if  obj1.data[0].AssetID == fo.value %}
                                 <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
@@ -54,16 +54,16 @@
                         </select><br>
                     
                     Shop:<br>
-                    <select name="Shop" value="{{user.data[0].Shop}}">
-                            <option >Please Choose</option>
-                            <option >Carpentry</option>
-                            <option >Electrical</option>
-                            <option >Locksmith</option>
-                            <option >Janitorial</option>
-                            <option >HVAC</option>
-                            <option >Plumbing</option>
-                            <option >Management</option>
-                          </select>
+                    <select name="Shop">
+						<option value=""{% if wo.data[0].Shop==None %} selected="selected"{% endif %}>Make a Choice</option>                        
+						<option value="Carpentry"{% if wo.data[0].Shop=="Carpentry" %} selected="selected"{% endif %}>Carpentry</option>
+                        <option value="Electrical"{% if wo.data[0].Shop=="Electrical" %} selected="selected"{% endif %}>Electrical</option>
+                        <option value="HVAC"{% if wo.data[0].Shop=="HVAC" %} selected="selected"{% endif %}>HVAC</option>
+                        <option value="Janitorial"{% if wo.data[0].Shop=="Janitorial" %} selected="selected"{% endif %}>Janitorial</option>
+                        <option value="Locksmith"{% if wo.data[0].Shop=="Locksmith" %} selected="selected"{% endif %}>Locksmith</option>
+                        <option value="Management"{% if wo.data[0].Shop=="Management" %} selected="selected"{% endif %}>Management</option>
+                        <option value="Plumbing"{% if wo.data[0].Shop=="Plumbing" %} selected="selected"{% endif %}>Plumbing</option>
+					</select>
                     <br>
                     <input type="submit" value="Submit" /> 
                 </form>
