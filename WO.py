@@ -16,7 +16,20 @@ class WO(baseObject):
         self.data = []
         for row in self.cur:
             self.data.append(row)
+
+    def getAllWOs(self):
+        sql = '''SELECT `WorkOrders` . * , Reqs.`UserFirstName` AS RFName, Reqs.`UserLastName` AS RLName, `Assets`.`AssetTag`, Techs.`UserFirstName` AS TFName, Techs.`UserLastName` AS TLName
+        FROM `WorkOrders`
+        LEFT JOIN `Users` Reqs ON `WorkOrders`.`RequesterID` = Reqs.`UserID`
+        LEFT JOIN `Users` Techs ON `WorkOrders`.`TechnicianID` = Techs.`UserID`
+        LEFT JOIN `Assets` ON `WorkOrders`.`AssetID` = `Assets`.`AssetID`
+        ORDER BY `WorkOrderID` DESC''' 
+        self.cur.execute(sql)
+        self.data = []
+        for row in self.cur:
+            self.data.append(row)
     
+
     def getByTechID(self,id):
         sql = f"Select * from `{self.tn}` where `TechnicianID` = %s AND `Status` = 'Open' ORDER BY `WorkOrderID` DESC" 
         self.cur.execute(sql,(id))
@@ -25,7 +38,7 @@ class WO(baseObject):
             self.data.append(row)
         self.getFKMult()
     
-    def getAllWOs(self):
+    def getAllWOsXX(self):
         sql = f"Select * from `{self.tn}` ORDER BY `WorkOrderID` DESC" 
         self.cur.execute(sql)
         self.data = []

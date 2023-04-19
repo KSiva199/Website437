@@ -20,10 +20,16 @@
         <td> <div> <a href="/wo/manage?pkval={{ obj.WorkOrderID }}"> {{ obj.WorkOrderID }} </a> </td>
             <td>{{ obj.RequestDate }} </td>  
             <td>{{ obj.RFName }} {{ obj.RLName }}</td> 
-            <td>{{ obj.Asset }} </td>
+            <td>{{ obj.AssetTag }} </td>
             <td>{{ obj.Issue }} </td>
             <td>{{ obj.Status }} </td>
-            <td>{{ obj.TFName }} {{ obj.TLName }}</td>  
+            <td>
+            {% if obj.TFName is not none %}
+                {{ obj.TFName }} {{ obj.TLName }}
+            {% else %}
+                <span style="color:rgb(129, 129, 124)">Not Assigned</span>
+            {% endif %}    
+                </td>  
         </div></td>
         </tr>
         {% endfor %}
