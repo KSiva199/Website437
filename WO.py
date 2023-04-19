@@ -1,5 +1,4 @@
 from baseObject import baseObject
-from Assets import Assets
 
 class WO(baseObject):
     def __init__(self):
@@ -56,6 +55,7 @@ class WO(baseObject):
             self.data.append(row) 
 
     def getWOFKs(self,id):
+        #print(self.data)
         fkList = ['RequesterID','ProblemID','AssetID','TechnicianID']
         for fk in fkList:
             val = self.data[0][fk]
@@ -80,9 +80,6 @@ class WO(baseObject):
     
     def dropDownList(self):
         choices = []
-        stChc = {}
-        stChc['value'] = ''
-        stChc['text'] = "Make A Choice"
         for item in self.data:
             d = {}
             d['value'] = item[self.pk]
@@ -92,14 +89,8 @@ class WO(baseObject):
     
     def verifyNew(self,n=0):
         if len(self.data[n]['Issue']) <= 10: 
-            self.errors.append('Problem/Issue must be longer than 10 characters. Please try again.')
-        a = Assets()
-        a.getAll()
-        aList = []
-        for i in a.data:
-            aList.append(i['AssetID'])
-        if self.data[n]['AssetID'] not in aList:
-            self.errors.append('No Matching Asset Exists. Please try again.')
+            self.errors.append('Problem/Issue must be longer than 10 characters')
+
         if len(self.errors) > 0:
             return False
         else:
@@ -107,14 +98,8 @@ class WO(baseObject):
 
     def verifyUpdt(self,n=0):
         if len(self.data[n]['Issue']) <= 10: 
-            self.errors.append('Problem/Issue must be longer than 10 characters. Please try again.')
-        a = Assets()
-        a.getAll()
-        aList = []
-        for i in a.data:
-            aList.append(str(i['AssetID']))
-        if self.data[n]['AssetID'] not in aList:
-            self.errors.append('No Matching Asset Exists. Please try again.')
+            self.errors.append('Problem/Issue must be longer than 10 characters')
+
         if len(self.errors) > 0:
             return False
         else:
