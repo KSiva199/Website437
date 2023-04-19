@@ -1,24 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="/probs/manage">Return to Problem Code List</a> &nbsp &nbsp  <!--<a href="/wo/manage">Return to Main Menu</a>--><a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br>
+<a href="/probs/manage">Return to Problem Code List</a> &nbsp &nbsp  <a href="/wo/manage">Return to Main Menu</a>
 <h1 style="background-color:powderblue;">Create Problem Code</h1>
 <h3> Add a Problem Code</h3>
             <div>
                 <form action="/probs/manage?action=insert" method="POST">
-                    
                     Problem Description:<br>
                     <input type="text" name="ProblemDesc" value="{{ prob.data[0].ProblemDesc }}" />
-                    <br><br>
-                    <div title="Example C-BRKNWNDW">
+                    <br>
+
                     Problem Code:<br>
-                    <input type="text" name="ProblemCode" value="{{ prob.data[0].ProblemCode }}" /><br>
-                    <i>(Naming Convention: [Shop Initial]-[Problem w/ no Vowels])</i><br></div>
+                    <input type="text" name="ProblemCode" value="{{ prob.data[0].ProblemCode }}" />
                     <br>
 
                     Facilities Shop:<br>
                     <select name="Shop">
-                        <option value="Make a Choice"{% if prob.data[0].Shop=="" %} selected="selected"{% endif %}>Make A Choice</option>                        
 						<option value="Carpentry"{% if prob.data[0].Shop=="Carpentry" %} selected="selected"{% endif %}>Carpentry</option>
                         <option value="Electrical"{% if prob.data[0].Shop=="Electrical" %} selected="selected"{% endif %}>Electrical</option>
                         <option value="HVAC"{% if prob.data[0].Shop=="HVAC" %} selected="selected"{% endif %}>HVAC</option>

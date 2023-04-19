@@ -12,10 +12,6 @@ class Problem_Codes(baseObject):
     
     def dropDownList(self):
         choices = []
-        stChc = {}
-        stChc['value'] = ''
-        stChc['text'] = "Make A Choice"
-        choices.append(stChc)
         for item in self.data:
             d = {}
             d['value'] = item[self.pk]

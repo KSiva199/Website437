@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br>
-<!--<a href="/wo/manage">Return to Main Menu</a><br>-->
+<a href="/wo/manage">Return to Main Menu</a><br>
 <h1 style="background-color:powderblue;">Report a Problem</h1>
             <div style="color: red">
                 {% if wo.errors|length > 0 %}
@@ -11,7 +10,7 @@
                     {% endfor %}
 				{% endif %}
             </div>
-            <div> <form method="POST" action="\wo\manage?action=insert">
+            <div> <form method="POST" action="manage?action=insert">
                     Where is the problem? Or what item has a problem?<br>
                     Location/Asset:
                     <select name="AssetID">

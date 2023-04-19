@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br>
-<!--<a href="/main_menu">Return to Main Menu</a><br>-->
+<a href="/main_menu">Return to Main Menu</a><br>
 <h1 style="background-color:powderblue;">New Work Order</h1>
 <h3> Create a Work Order #{{ wo.data[0].WorkOrderID }}</h3>
             <div>
-                <form method="POST" action="\wo\manage?action=insert">
+                <form method="POST" action="manage_wo">
                     Requester:
                     <select name="RequesterID">
                         {% for fo in wo.RID %}
@@ -16,24 +15,25 @@
                     <br>
                     Location/Asset:
                     <select name="AssetID">
-                        {% for fo2 in wo.AID %}
-                            <option value="{{ fo2.value }}">{{ fo2.text }}</option>
+                        {% for fo in wo.AID %}
+                            <option value="{{ fo.value }}">{{ fo.text }}</option>
                         {% endfor %}
                     </select>
                     <br>                    
                     Problem/Issue:<br>
-                    <textarea id="addwoiss" name="Issue" rows="4" cols="50" placeholder="Enter description of problem"></textarea><br>
+                    <textarea id="addwoiss" name="Issue" rows="4" cols="50">
+                    </textarea><br>
                     Technician:
                     <select name="TechnicianID">
-                        {% for fo3 in wo.TID %}
-                            <option value="{{ fo3.value }}">{{ fo3.text }}</option>
+                        {% for fo in wo.TID %}
+                            <option value="{{ fo.value }}">{{ fo.text }}</option>
                         {% endfor %}
                     </select>
                     <br>
                     Problem Code:
                     <select name="ProblemID">
-                        {% for fo4 in wo.PID %}
-                            <option value="{{ fo4.value }}">{{ fo4.text }}</option>
+                        {% for fo in wo.PID %}
+                            <option value="{{ fo.value }}">{{ fo.text }}</option>
                         {% endfor %}
                     </select>
                     <br><br> 
