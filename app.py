@@ -54,8 +54,6 @@ def register():
 
 @app.route('/manage_user',methods=['GET','POST'])
 def manage_user():
-    #if checkSession() == False: 
-    #    return render_template('/users/home.html', msg='Session Failed')
     action = request.args.get('action')
     pkval = request.args.get('pkval')
     if action is not None and action=='new':
@@ -120,8 +118,6 @@ def redirect_user():
     
 @app.route('/login_user',methods=['GET','POST'])
 def login_user():
-    if checkSession() == False: 
-      return redirect('/home')
     if request.form.get('Username') is not None and request.form.get('Password') is not None:
         u = Users()
         if u.tryLogin(request.form.get('Username'),request.form.get('Password')):
