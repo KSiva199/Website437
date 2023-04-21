@@ -25,11 +25,11 @@
                     <br>
                     <b>Location/Asset:</b><br>
                     <select name="AssetID">
-                        {% for fo in wo.AID %}
-                            {% if  wo.data[0].AssetID == fo.value %}
-                                <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
+                        {% for fo2 in wo.AID %}
+                            {% if  wo.data[0].AssetID == fo2.value %}
+                                <option selected="true" value="{{ fo2.value }}">{{ fo2.text }}</option>
                             {% else %}
-                                <option value="{{ fo.value }}">{{ fo.text }}</option>
+                                <option value="{{ fo2.value }}">{{ fo2.text }}</option>
                             {% endif %}
                         {% endfor %}
                     </select>
@@ -43,17 +43,18 @@
 					</select><br>
                     <b>Assigned Technician:</b><br>
                     <select name="TechnicianID">
-                        {% for fo in wo.TID %}
-                            {% if  wo.data[0].TechnicianID == fo.value %}
-                                <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
+                        {% for fo3 in wo.TID %}
+                            {% if  wo.data[0].TechnicianID == fo3.value %}
+                                <option selected="true" value="{{ fo3.value }}">{{ fo3.text }}</option>
                             {% else %}
-                                <option value="{{ fo.value }}">{{ fo.text }}</option>
+                                <option value="{{ fo3.value }}">{{ fo3.text }}</option>
                             {% endif %}
                         {% endfor %}
                     </select>
                     <br>
                     <b>Facilities Shop:</b><br>
                     <select name="Shop">
+						<option value=None {% if wo.data[0].Shop==None %} selected="selected"{% endif %}>Please Choose A Shop</option>                        
 						<option value="Carpentry"{% if wo.data[0].Shop=="Carpentry" %} selected="selected"{% endif %}>Carpentry</option>
                         <option value="Electrical"{% if wo.data[0].Shop=="Electrical" %} selected="selected"{% endif %}>Electrical</option>
                         <option value="HVAC"{% if wo.data[0].Shop=="HVAC" %} selected="selected"{% endif %}>HVAC</option>
@@ -65,11 +66,11 @@
                     <br>
                     <b>Problem Code:</b><br>
                     <select name="ProblemID">
-                        {% for fo in wo.PID %}
-                            {% if  wo.data[0].ProblemID == fo.value %}
-                                <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
+                        {% for fo4 in wo.PID %}
+                            {% if  wo.data[0].ProblemID == fo4.value %}
+                                <option selected="true" value="{{ fo4.value }}">{{ fo4.text }}</option>
                             {% else %}
-                                <option value="{{ fo.value }}">{{ fo.text }}</option>
+                                <option value="{{ fo4.value }}">{{ fo4.text }}</option>
                             {% endif %}
                         {% endfor %}
                     </select>

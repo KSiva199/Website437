@@ -293,11 +293,10 @@ def manage_WO():
     wo.AID = a.dropDownList()
     t = Users()
     t.getByField('Role','Technician')
-    wo.TID= t.dropDownList()
+    wo.TID= t.woDDList()
     p = Problem_Codes()
     p.getAll()
     wo.PID = p.dropDownList()
-
     
     action = request.args.get('action')
     pkval = request.args.get('pkval')
@@ -347,6 +346,7 @@ def manage_WO():
         wo.data[0]['ProblemID'] = request.form.get('ProblemID')
         wo.data[0]['AssetID'] = request.form.get('AssetID')
         wo.data[0]['TechnicianID'] = request.form.get('TechnicianID')
+        print(wo.data[0])
         if wo.verifyUpdt():
             wo.update()
             if session['user']['Role'] == 'Manager':
@@ -381,6 +381,8 @@ def manage_WO():
         #return render_template('/wo/listwo.html',wo = wo)
     elif pkval == 'new':
         wo.createBlank()
+        wo.data[0]['LocationID'] = session['user']['LocationID']
+        print(wo.data)
         if session['user']['Role'] == 'Manager':
             return render_template('wo/addwo_mgr.html',wo=wo) 
         else:
@@ -389,6 +391,7 @@ def manage_WO():
     else:
         wo.getById(pkval)
         wo.getWOFKs(pkval)
+        print(wo.data)
         if session['user']['Role'] == 'Manager':
             return render_template('wo/manage.html',wo=wo) 
         elif session['user']['Role']=='Technician':

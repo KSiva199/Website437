@@ -18,6 +18,7 @@ class Assets(baseObject):
     
     def dropDownList(self):
         choices = []
+        choices.append({'value': None,'text': 'Please Choose An Asset'})
         for item in self.data:
             d = {}
             d['value'] = item[self.pk]

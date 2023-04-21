@@ -79,9 +79,20 @@ class Users(baseObject):
     
     def dropDownList(self):
         choices = []
+        choices.append({'value': None,'text': 'Please Choose A User'})
         for item in self.data:
             d = {}
             d['value'] = item[self.pk]
             d['text'] = f"{item['UserFirstName']} {item['UserLastName']}"
+            choices.append(d)
+        return choices
+    
+    def woDDList(self):
+        choices = []
+        choices.append({'value': None,'text': 'Please Choose A User'})
+        for item in self.data:
+            d = {}
+            d['value'] = int(item[self.pk])
+            d['text'] = f"{item['UserFirstName']} {item['UserLastName']}-{item['Shop']}"
             choices.append(d)
         return choices

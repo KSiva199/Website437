@@ -23,6 +23,7 @@ class WO(baseObject):
         LEFT JOIN `Users` Reqs ON `WorkOrders`.`RequesterID` = Reqs.`UserID`
         LEFT JOIN `Users` Techs ON `WorkOrders`.`TechnicianID` = Techs.`UserID`
         LEFT JOIN `Assets` ON `WorkOrders`.`AssetID` = `Assets`.`AssetID`
+        LEFT JOIN `Problems` ON `WorkOrders`.`ProblemID` = `Problems`.`ProblemID`
         ORDER BY `WorkOrderID` DESC''' 
         self.cur.execute(sql)
         self.data = []

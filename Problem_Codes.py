@@ -12,9 +12,10 @@ class Problem_Codes(baseObject):
     
     def dropDownList(self):
         choices = []
+        choices.append({'value': None,'text': 'Please Choose A Problem'})
         for item in self.data:
             d = {}
-            d['value'] = item[self.pk]
+            d['value'] = int(item[self.pk])
             d['text'] = f"{item['ProblemDesc']} ({item['ProblemCode']})"
             choices.append(d)
         return choices

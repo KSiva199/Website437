@@ -7,15 +7,19 @@
             <div>
                 <form action="/probs/manage?action=insert" method="POST">
                     Problem Description:<br>
-                    <input type="text" name="ProblemDesc" value="{{ prob.data[0].ProblemDesc }}" />
+                    <input type="text" size=100 name="ProblemDesc" value="{{ prob.data[0].ProblemDesc }}" />
                     <br>
-
+                    <br>
                     Problem Code:<br>
-                    <input type="text" name="ProblemCode" value="{{ prob.data[0].ProblemCode }}" />
+                    <span title="Ex:) P-TLTLK = Plumbing-Toilet Leak">
+                    <input type="text" name="ProblemCode" value="{{ prob.data[0].ProblemCode }}" /></span><br>
+                    <i> Code should follow [Shop Initial]-[Description w/ few vowels]<br>
+                        i.e. Electrical-No Power = E-NOPWR</i>
                     <br>
-
-                    Facilities Shop:<br>
+                    <br>        
+                    <b>Facilities Shop:</b><br>
                     <select name="Shop">
+						<option value=None {% if prob.data[0].Shop==None %} selected="selected"{% endif %}>Please Choose A Shop</option>                        
 						<option value="Carpentry"{% if prob.data[0].Shop=="Carpentry" %} selected="selected"{% endif %}>Carpentry</option>
                         <option value="Electrical"{% if prob.data[0].Shop=="Electrical" %} selected="selected"{% endif %}>Electrical</option>
                         <option value="HVAC"{% if prob.data[0].Shop=="HVAC" %} selected="selected"{% endif %}>HVAC</option>
