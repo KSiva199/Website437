@@ -248,6 +248,29 @@ def login_user():
             </div>
 {% endblock %}
 ```
+
+```sql
+##Various values needed from different fields in different tables.
+
+SELECT * FROM WorkOrders as wo
+INNER JOIN Users AS u ON wo.RequesterID = u.UserID
+INNER JOIN Assets AS a ON wo.AssetID = a.AssetID;
+
+##Listing of all work orders submitted by the Requester.
+
+SELECT WorkOrders.WorkOrderID, WorkOrders.RequestDate, WorkOrders.Issue, WorkOrders.Status, WorkOrders.TechnicianID, Users.UserID, Users.UserFirstName, Users.UserLastName FROM WorkOrders INNER JOIN Users ON WorkOrders.TechnicianID = Users.UserID
+
+##List of users for manager to select from in order to update their information.
+
+SELECT Users.UserFirstName, Users.UserLastName, Users.Username, Users.PhoneNumber, Users.LocationID, Users.Role, Assets.AssetID, Assets.AssetTag FROM Users LEFT JOIN Assets ON Users.LocationID = Assets.AssetID;
+
+##
+SELECT WorkOrderComms.CommDate, WorkOrderComms.Message, WorkOrderComms.UserID AS WOCUserID, Users.UserID AS UsersUserID, Users.UserFirstName, Users.UserLastName FROM WorkOrderComms
+INNER JOIN Users ON WorkOrderComms.UserID = Users.UserID
+WHERE WorkOrderComms.WorkOrderID = <pkval>; 
+```
+
+
 ## Demo
 
 Here is the Quick Demo of our Work
