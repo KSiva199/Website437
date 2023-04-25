@@ -256,7 +256,16 @@ INNER JOIN Assets AS a ON wo.AssetID = a.AssetID;
 
 SELECT WorkOrders.WorkOrderID, WorkOrders.RequestDate, WorkOrders.Issue, WorkOrders.Status, WorkOrders.TechnicianID, Users.UserID, Users.UserFirstName, Users.UserLastName 
 FROM WorkOrders 
-INNER JOIN Users ON WorkOrders.TechnicianID = Users.UserID
+INNER JOIN Users ON WorkOrders.TechnicianID = Users.UserID;
+
+SELECT * FROM WorkOrders as wo
+INNER JOIN Users AS u ON wo.TechnicianID = u.UserID
+INNER JOIN Assets AS a ON wo.AssetID = a.AssetID
+WHERE WorkOrderID = <pkval>;
+
+SELECT WorkOrderComms.CommDate, WorkOrderComms.Message, WorkOrderComms.UserID AS WOCUserID, Users.UserID AS UsersUserID, Users.UserFirstName, Users.UserLastName FROM WorkOrderComms
+INNER JOIN Users ON WorkOrderComms.UserID = Users.UserID
+WHERE WorkOrderComms.WorkOrderID = <pkval>;
 ```
 
 
