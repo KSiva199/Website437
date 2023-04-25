@@ -187,6 +187,7 @@ def login_user():
 ```
 
 ```html
+HTML Example
 {% extends "base.html" %}
 
 {% block content %}
@@ -251,6 +252,7 @@ def login_user():
 ```
 
 ```sql
+SQL Example
 SELECT * FROM WorkOrders as wo
 INNER JOIN Users AS u ON wo.RequesterID = u.UserID
 INNER JOIN Assets AS a ON wo.AssetID = a.AssetID;
