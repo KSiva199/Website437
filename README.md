@@ -250,6 +250,7 @@ def login_user():
 ```
 ## Demo
 
-Insert gif or link to demo
+Here is the Quick Demo of our Work
+
 ![](project.gif)
 
