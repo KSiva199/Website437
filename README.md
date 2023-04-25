@@ -253,6 +253,10 @@ def login_user():
 SELECT * FROM WorkOrders as wo
 INNER JOIN Users AS u ON wo.RequesterID = u.UserID
 INNER JOIN Assets AS a ON wo.AssetID = a.AssetID;
+
+SELECT WorkOrders.WorkOrderID, WorkOrders.RequestDate, WorkOrders.Issue, WorkOrders.Status, WorkOrders.TechnicianID, Users.UserID, Users.UserFirstName, Users.UserLastName 
+FROM WorkOrders 
+INNER JOIN Users ON WorkOrders.TechnicianID = Users.UserID
 ```
 
 
