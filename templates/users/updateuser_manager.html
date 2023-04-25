@@ -27,16 +27,17 @@
                     <input type="number" name="PhoneNumber" value="{{ user.data[0].PhoneNumber}}" />
                     <br>
                     Password:<br>
-                    <input type="password" name="Password" value="{{user.data[0].Password}}" readonly/>
+                    <input type="password" name="Password" placeholder="Cannot Edit" readonly/>
                     <br>
 
                     Retype Password:<br>
-                    <input type="password" name="ConfirmPassword" value="{{user.data[0].Password}}" readonly />
+                    <input type="password" name="ConfirmPassword" placeholder="Cannot Edit" readonly />
                     <br>
                     Location:<br>
+
                     <select name="LocationID">
                         {% for fo in obj1.fo %}
-                            {% if  obj1.data[0].Location == fo.value %}
+                            {% if  user.data[0].LocationID == fo.value %}
                                 <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
                             {% else %}
                                 <option value="{{ fo.value }}">{{ fo.text }}</option>

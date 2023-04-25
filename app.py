@@ -39,6 +39,8 @@ def register():
     u =Users()
     o.getByField('ParentAsset','BHSnell')
     o.fo=o.dropDownList()
+    print('here')
+    print(o.getByField('ParentAsset','BHSnell'))
     action = request.args.get('action')
     if action is not None and action=='new':
         return render_template('/users/add.html',obj=u,obj1=o)
@@ -83,6 +85,7 @@ def manage_user():
         o.data[0]['Password'] = request.form.get('Password')
         o.data[0]['Password2'] = request.form.get('ConfirmPassword')
         o.data[0]['PhoneNumber'] = request.form.get('PhoneNumber')
+        o.data[0]['LocationID']=request.form.get('LocationID')
         if session['user']['Role'] == 'Manager':
             o.data[0]['Role'] = request.form.get('Role')
             o.data[0]['Shop'] = request.form.get('Shop')

@@ -36,7 +36,7 @@
                     Location:<br>
                     <select name="LocationID">
                         {% for fo in obj1.fo %}
-                            {% if  obj1.data[0].LocationID == fo.value %}
+                            {% if  user.data[0].LocationID == fo.value %}
                                 <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
                             {% else %}
                                 <option value="{{ fo.value }}">{{ fo.text }}</option>
