@@ -190,13 +190,21 @@ def list_assets():
 
 @app.route('/register_asset')
 def register_asset():
-    u =Assets()
+    u=Assets()
+    p=Assets()
     action = request.args.get('action')
     if action is not None and action=='new':
+        p.getAll()
+        u.UPAsset = p.uParentDDList()
+        u.UAType = p.uTypeDDList() 
         return render_template('/assets/add.html',obj=u)
     if action is not None and action=='update':
         pkval = request.args.get('pkval')
         u.getById(pkval)
+        print(u.data)
+        p.getAll()
+        u.UPAsset = p.uParentDDList()
+        u.UAType = p.uTypeDDList()
         return render_template('/assets/manage.html',obj=u)
 
 
@@ -218,7 +226,6 @@ def manage_asset():
         return render_template('/users/manager_option.html',msg='Asset Added')
     if action is not None and action=='update':
         o=Assets()
-        o.getById(pkval)
         o.data[0]['ParentAsset'] = request.form.get('ParentAsset')
         o.data[0]['AssetTag'] = request.form.get('AssetTag')
         o.data[0]['AssetType'] = request.form.get('AssetType')
@@ -293,11 +300,10 @@ def manage_WO():
     wo.AID = a.dropDownList()
     t = Users()
     t.getByField('Role','Technician')
-    wo.TID= t.dropDownList()
+    wo.TID= t.woDDList()
     p = Problem_Codes()
     p.getAll()
     wo.PID = p.dropDownList()
-
     
     action = request.args.get('action')
     pkval = request.args.get('pkval')
@@ -347,6 +353,7 @@ def manage_WO():
         wo.data[0]['ProblemID'] = request.form.get('ProblemID')
         wo.data[0]['AssetID'] = request.form.get('AssetID')
         wo.data[0]['TechnicianID'] = request.form.get('TechnicianID')
+        print(wo.data[0])
         if wo.verifyUpdt():
             wo.update()
             if session['user']['Role'] == 'Manager':
@@ -381,6 +388,8 @@ def manage_WO():
         #return render_template('/wo/listwo.html',wo = wo)
     elif pkval == 'new':
         wo.createBlank()
+        wo.data[0]['LocationID'] = session['user']['LocationID']
+        print(wo.data)
         if session['user']['Role'] == 'Manager':
             return render_template('wo/addwo_mgr.html',wo=wo) 
         else:
@@ -389,6 +398,7 @@ def manage_WO():
     else:
         wo.getById(pkval)
         wo.getWOFKs(pkval)
+        print(wo.data)
         if session['user']['Role'] == 'Manager':
             return render_template('wo/manage.html',wo=wo) 
         elif session['user']['Role']=='Technician':

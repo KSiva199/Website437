@@ -15,7 +15,11 @@
                     Location/Asset:
                     <select name="AssetID">
                         {% for fo in wo.AID %}
-                            <option value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% if  wo.data[0].LocationID == fo.value %}
+                                <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% else %}
+                                <option value="{{ fo.value }}">{{ fo.text }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                     <br>

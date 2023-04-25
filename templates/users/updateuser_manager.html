@@ -34,10 +34,9 @@
                     <input type="password" name="ConfirmPassword" value="{{user.data[0].Password}}" readonly />
                     <br>
                     Location:<br>
-                    <select name="LocationID", aria-placeholder="Select">
-                        <option value="" disabled selected>Select Your Option</option>
+                    <select name="LocationID">
                         {% for fo in obj1.fo %}
-                            {% if  obj1.data[0].AssetID == fo.value %}
+                            {% if  obj1.data[0].Location == fo.value %}
                                 <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
                             {% else %}
                                 <option value="{{ fo.value }}">{{ fo.text }}</option>
@@ -45,25 +44,28 @@
                         {% endfor %}
                     </select>
                     <br>
+                    <i><span style="color:rgb(185, 9, 6)"><font size="2">Location not pertinent for Technicians</font></span></i>
+                    <br>
                     Role:<br>
                     <select name="Role" value="{{user.data[0].Role}}">
-                            <option>Please Choose</option>
-                            <option >Requester</option>
-                            <option >Technician</option>
-                            <option >Manager</option>
+                        <option value=None {% if user.data[0].Role==None %} selected="selected"{% endif %}>Please Choose A Role</option>
+                        <option value="Requester" {% if user.data[0].Role=="Requester" %} selected="selected"{% endif %}>Requester</option>
+                        <option value="Technician" {% if user.data[0].Role=="Technician" %} selected="selected"{% endif %}>Technician</option>
+                        <option value="Manager" {% if user.data[0].Role=="Manager" %} selected="selected"{% endif %}>Manager</option>
                         </select><br>
                     
                     Shop:<br>
                     <select name="Shop" value="{{user.data[0].Shop}}">
-                            <option >Please Choose</option>
-                            <option >Carpentry</option>
-                            <option >Electrical</option>
-                            <option >Locksmith</option>
-                            <option >Janitorial</option>
-                            <option >HVAC</option>
-                            <option >Plumbing</option>
-                            <option >Management</option>
-                          </select>
+                        <option value=None {% if user.data[0].Shop==None %} selected="selected"{% endif %}>Please Choose A Shop</option>                        
+						<option value="Carpentry"{% if user.data[0].Shop=="Carpentry" %} selected="selected"{% endif %}>Carpentry</option>
+                        <option value="Electrical"{% if user.data[0].Shop=="Electrical" %} selected="selected"{% endif %}>Electrical</option>
+                        <option value="HVAC"{% if user.data[0].Shop=="HVAC" %} selected="selected"{% endif %}>HVAC</option>
+                        <option value="Janitorial"{% if user.data[0].Shop=="Janitorial" %} selected="selected"{% endif %}>Janitorial</option>
+                        <option value="Locksmith"{% if user.data[0].Shop=="Locksmith" %} selected="selected"{% endif %}>Locksmith</option>
+                        <option value="Management"{% if user.data[0].Shop=="Management" %} selected="selected"{% endif %}>Management</option>
+                        <option value="Plumbing"{% if user.data[0].Shop=="Plumbing" %} selected="selected"{% endif %}>Plumbing</option>
+                    </select>
+                    <br>
                     <br>
                     <input type="submit" value="Submit" /> 
                 </form>

@@ -18,9 +18,50 @@ class Assets(baseObject):
     
     def dropDownList(self):
         choices = []
+        choices.append({'value': None,'text': 'Please Choose An Asset'})
         for item in self.data:
             d = {}
             d['value'] = item[self.pk]
             d['text'] = f"{item['AssetTag']}-({item['AssetType']})"
             choices.append(d)
+        return choices
+    
+    def uParentDDList(self):
+        choices = []
+        l = {'value': None,'text': 'Please Choose Parent Asset'}
+        x=[]
+        tmp = []
+        for item in self.data:
+            if item['ParentAsset'] not in tmp:
+                tmp.append(item['ParentAsset'])
+                d = {}
+                d['value'] = item['ParentAsset']
+                d['text'] = f"{item['ParentAsset']}"
+                x.append(d)
+            else:
+                continue
+        x.sort(key=lambda k : k['text'])
+        choices.append(l)
+        for i in x:
+            choices.append(i)
+        return choices
+    
+    def uTypeDDList(self):
+        choices = []
+        l = {'value': None,'text': 'Please Choose An Asset Type'}
+        x=[]
+        tmp = []
+        for item in self.data:
+            if item['AssetType'] not in tmp:
+                tmp.append(item['AssetType'])
+                d = {}
+                d['value'] = item['AssetType']
+                d['text'] = f"{item['AssetType']}"
+                x.append(d)
+            else:
+                continue
+        x.sort(key=lambda k : k['text'])
+        choices.append(l)
+        for i in x:
+            choices.append(i)
         return choices

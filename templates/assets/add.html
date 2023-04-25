@@ -11,17 +11,26 @@
             <a href="/main_menu">Return to Main Menu</a><br><br>
             <div>
                 <form method="POST" action="manage_asset?action=new">
-                    Parent Asset:<br>
-                    <input type="text" name="ParentAsset" required/>
+                    <b>Parent Asset:</b><br>
+                    <select name="ParentAsset">
+                    {% for fo in obj.UPAsset %}
+                        <option value="{{ fo.text }}">{{ fo.text }}</option>
+                    {% endfor %}
+                    </select>
                     <br>
-
-                    Asset Tag:<br>
+                    <b>Asset Type:</b><br>
+                    <select name="AssetType">
+                        {% for fo1 in obj.UAType %}
+                            <option value="{{ fo1.text }}">{{ fo1.text }}</option>
+                        {% endfor %}
+                        </select>
+                    <br>
+                    <b>Asset Tag:</b><br>
                     <input type="text" name="AssetTag"  required/>
                     <br>
+                    <i><span style="color:rgb(129, 129, 124)"><font size="2"> Tag should follow [Parent Asset]-[3 character abbrev of asset type]-[Num]<br>
+                        i.e. SN101WDW-1</font></span></i><br>
 
-                    Asset Type:<br>
-                    <input type="text" size="20" name="AssetType" required/>
-                    <br>
 
                     <br>
                     <button type = "submit" id=submit >Submit</button>  
