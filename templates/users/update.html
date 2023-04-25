@@ -36,15 +36,14 @@
                     Location:<br>
                     <select name="LocationID">
                         {% for fo in obj1.fo %}
-                            {% if  obj1.data[0].AssetID == fo.value %}
-                                <option value="" disabled selected>Select Your Option</option>
+                            {% if  obj1.data[0].LocationID == fo.value %}
                                 <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
                             {% else %}
                                 <option value="{{ fo.value }}">{{ fo.text }}</option>
                             {% endif %}
                         {% endfor %}
-                    </select> <br><br>
-                    
+                    </select> <br>
+                    <i><span style="color:rgb(185, 9, 6)"><font size="2">Location not pertinent for Technicians</font></span></i><br>
                     <input type="submit" value="Submit" /> &nbsp &nbsp 
                 </form>
                 

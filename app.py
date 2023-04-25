@@ -190,13 +190,21 @@ def list_assets():
 
 @app.route('/register_asset')
 def register_asset():
-    u =Assets()
+    u=Assets()
+    p=Assets()
     action = request.args.get('action')
     if action is not None and action=='new':
+        p.getAll()
+        u.UPAsset = p.uParentDDList()
+        u.UAType = p.uTypeDDList() 
         return render_template('/assets/add.html',obj=u)
     if action is not None and action=='update':
         pkval = request.args.get('pkval')
         u.getById(pkval)
+        print(u.data)
+        p.getAll()
+        u.UPAsset = p.uParentDDList()
+        u.UAType = p.uTypeDDList()
         return render_template('/assets/manage.html',obj=u)
 
 
@@ -218,7 +226,6 @@ def manage_asset():
         return render_template('/users/manager_option.html',msg='Asset Added')
     if action is not None and action=='update':
         o=Assets()
-        o.getById(pkval)
         o.data[0]['ParentAsset'] = request.form.get('ParentAsset')
         o.data[0]['AssetTag'] = request.form.get('AssetTag')
         o.data[0]['AssetType'] = request.form.get('AssetType')
