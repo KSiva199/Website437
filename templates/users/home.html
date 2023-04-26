@@ -2,16 +2,22 @@
 <html lang="'en">
 
 <head>
+    <style>
+        body {
+        font-family: arial;
+      }
+    </style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title> Home </title>
 </head>
-
 <body>
+    <p>
     <div>
         <img src="Cu.png" width="1410px" height="100px"> 
     </div>
-    <centre> 
+    <centre>
+
     <h1> Clarkson Work Order System </h1>
     <div> {{ msg }} </div>
     <form method="POST" action="manage_user">
@@ -24,9 +30,9 @@
         <button type = "submit" id=submit formaction="{{url_for('login_user')}}">Login</button>  
     </form>
     <br>
-    <a href="/register?action=new">Don't have an account? Sign Up </a>
+    <a href="/register?action=new">Don't have an account? Sign Up </a></p>
     </centre>
-
+</p>
+</style>
 </body>
-
 </html>
