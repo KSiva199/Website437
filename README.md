@@ -19,6 +19,14 @@ against the work order.
 - [Michelle A. McGill](https://github.com/mapmcgill)
 - [Siva Ram](https://github.com/KSiva199)
 
+## Login Credentials(For Testing Purpose)
+|Username| Password|Title|
+|:--------:|--------:|----:|
+|justinm@gmail.com|justin123|Manager|
+|justint@gmail.com|justin123|Technician|
+|pashi@gmail.com|pashi123|Requester|
+
+
 
 
 ## Technogies Used
@@ -278,4 +286,11 @@ WHERE WorkOrderComms.WorkOrderID = <pkval>;
 Here is the Quick Demo of our Work
 
 ![](project.gif)
+
+
+## Support
+
+For support, email                                                 
+mmcgill@clarkson.edu                                                
+korakus@clarkson.edu
 
