@@ -14,11 +14,11 @@
 <body>
     <p>
     <div>
-        <img src="Cu.png" width="1410px" height="100px"> 
+        <img src="Cu.png" width="1900px" height="100px"> 
     </div>
     <centre>
 
-    <h1> Clarkson Work Order System </h1>
+        <h1 style="background-color:powderblue;">Clarkson Work Order System</h1>
     <div> {{ msg }} </div>
     <form method="POST" action="manage_user">
         Username:<br>
@@ -26,8 +26,8 @@
         <br>  
         Password:<br>
         <input type="Password" name="Password" />
-        <br>
-        <button type = "submit" id=submit formaction="{{url_for('login_user')}}">Login</button>  
+        <br><br>
+        <button type = "submit" id=submit formaction="{{url_for('login_user')}}">Login</button>
     </form>
     <br>
     <a href="/register?action=new">Don't have an account? Sign Up </a></p>

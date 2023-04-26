@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html lang="'en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Option Page</title>
-    <script type="text/javascript">
-        function preventBack() { window.history.forward(); }
-        setTimeout("preventBack()", 0);
-        window.onunload = function () { null };
-    </script>
-</head>
-
-<body>
-    
-    <div>
-        <img src="Cu.png" width="1410px" height="100px"> 
-    </div>
-    <a href="{{url_for('home')}}" class="btn btn-info btn-lg">
-        <span class="glyphicon glyphicon-log-out"></span> Logout </a><br>
-    
+{% block content %}   
     <h1 style="background-color:powderblue;">Welcome, {{me.UserFirstName}} {{me.UserLastName}} </h1>
     
     <h2> Please Choose an Option </h2>
@@ -32,3 +13,4 @@
     
 </body>
 </html>
+{% endblock %}

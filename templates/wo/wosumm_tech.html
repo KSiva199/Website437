@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="/wocomms/list_comms?pkval={{ wo.data[0].WorkOrderID }}"><b>Add\View Work Order Messages</b></a> &nbsp &nbsp<a href="/wo/list_wo"><b>Return to Work Order List</b></a>
+<br>
+<a href="/wocomms/list_comms?pkval={{ wo.data[0].WorkOrderID }}">Add\View Work Order Messages</a> &nbsp &nbsp<a href="/wo/list_wo"><b>Return to Work Order List</b></a>
 <h1 style="background-color:powderblue;">Work Order Summary</h1>
 <h3> Summary of Work Order #{{ wo.data[0].WorkOrderID }}</h3>
 <i>To close a work order, enter a solution, add labor hours, and change the status to Complete.<br>
