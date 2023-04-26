@@ -19,7 +19,7 @@ against the work order.
 - [Michelle A. McGill](https://github.com/mapmcgill)
 - [Siva Ram](https://github.com/KSiva199)
 
-## Credentials
+## Login Credentials(For Testing Purpose)
 |Username| Password|Title|
 |:--------:|--------:|----:|
 |justinm@gmail.com|justin123|Manager|
@@ -290,7 +290,7 @@ Here is the Quick Demo of our Work
 
 ## Support
 
-For support, email 
-mmcgill@clarkson.edu
+For support, email                                                 
+mmcgill@clarkson.edu                                                
 korakus@clarkson.edu
 
