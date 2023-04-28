@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="/main_menu">Return to Main Menu</a><br><br>
+<br>
+<a href="/main_menu">Return to Main Menu</a><br>
+<h1 style="background-color:powderblue;">Update User Account Information</h1>
             <div style="color:green;">
                 {% if user.errors|length > 0 %}
                     {% for error in user.errors  %}

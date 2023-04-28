@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+<br>
 <a href="{{url_for('redirect_user')}}"> Return to Main Menu </a> <br>
                 <a href="{{url_for('logout')}}" class="btn btn-info btn-lg">
                     <span class="glyphicon glyphicon-log-out"></span></a>
-<br>
+<h1 style="background-color:powderblue;">Available Technicians</h1>
                 <table>
                     <tr>
                         <th> User ID </th>

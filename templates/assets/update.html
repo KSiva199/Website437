@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<br>
             <div style="color:green;">
                 {% if user.errors|length > 0 %}
                     {% for error in user.errors  %}
@@ -8,6 +9,7 @@
                     {% endfor %}
                 {% endif %}
             </div>
+            <h1 style="background-color:powderblue;">Update Asset Information</h1>
             <div>
                 <form action="manage_user?pkval={{user.data[0].UserID}}&action=update" method="POST">
                     First Name:<br>

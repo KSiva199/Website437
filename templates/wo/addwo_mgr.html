@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<br>
 <a href="/main_menu">Return to Main Menu</a><br>
 <h1 style="background-color:powderblue;">New Work Order</h1>
 <h3> Create a Work Order #{{ wo.data[0].WorkOrderID }}</h3>
             <div>
-                <form method="POST" action="manage_wo">
+                <form method="POST" action="manage?action=insert">
                     Requester:
                     <select name="RequesterID">
                         {% for fo in wo.RID %}
@@ -29,6 +30,17 @@
                             <option value="{{ fo.value }}">{{ fo.text }}</option>
                         {% endfor %}
                     </select>
+                    <br>
+                    Shop:<select name="Shop">
+						<option value=None {% if wo.data[0].Shop==None %} selected="selected"{% endif %}>Please Choose A Shop</option>                        
+						<option value="Carpentry"{% if wo.data[0].Shop=="Carpentry" %} selected="selected"{% endif %}>Carpentry</option>
+                        <option value="Electrical"{% if wo.data[0].Shop=="Electrical" %} selected="selected"{% endif %}>Electrical</option>
+                        <option value="HVAC"{% if wo.data[0].Shop=="HVAC" %} selected="selected"{% endif %}>HVAC</option>
+                        <option value="Janitorial"{% if wo.data[0].Shop=="Janitorial" %} selected="selected"{% endif %}>Janitorial</option>
+                        <option value="Locksmith"{% if wo.data[0].Shop=="Locksmith" %} selected="selected"{% endif %}>Locksmith</option>
+                        <option value="Management"{% if wo.data[0].Shop=="Management" %} selected="selected"{% endif %}>Management</option>
+                        <option value="Plumbing"{% if wo.data[0].Shop=="Plumbing" %} selected="selected"{% endif %}>Plumbing</option>
+					</select>
                     <br>
                     Problem Code:
                     <select name="ProblemID">

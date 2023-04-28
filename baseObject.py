@@ -47,7 +47,7 @@ class baseObject:
         sql = sql[0:-1] + ') VALUES ('
         tokens = ("%s," * count)[0:-1]
         sql += tokens + ');'
-        print(sql,vals)
+        #print(sql,vals)
         self.cur.execute(sql,vals)
         self.data[n][self.pk] = self.cur.lastrowid
 
@@ -74,7 +74,7 @@ class baseObject:
     
     def getByField(self,field,val):
         sql = f"Select * from `{self.tn}` where `{field}` = %s" 
-        print(sql,val)
+        #print(sql,val)
         self.cur.execute(sql,(val))
         self.data = []
         for row in self.cur:
