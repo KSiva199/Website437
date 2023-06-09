@@ -125,7 +125,7 @@ def login_user():
         u = Users()
         if u.tryLogin(request.form.get('Username'),request.form.get('Password')):
             u.getById(u.data[0]['UserID'])
-            #print(u.data)
+            print(u.data)
             print('login ok')
             session['user'] = u.data[0]
             session['active'] = time.time()
