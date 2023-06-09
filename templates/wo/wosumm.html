@@ -1,9 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="/wocomms/list_comms?pkval={{ wo.data[0].WorkOrderID }}"><b>Work Order Messages</b></a> &nbsp &nbsp
-<a href="/wo/list_wo"><b>Return to Work Order List</b></a>&nbsp &nbsp
-<a href="/main_menu">Return to Main Menu</a><br><br>
+<br>
+<a href="/wocomms/list_comms?pkval={{ wo.data[0].WorkOrderID }}">Work Order Messages</a> &nbsp &nbsp
+<a href="/wo/list_wo">Return to Work Order List</a>&nbsp &nbsp
+<a href="/main_menu">Return to Main Menu</a><br>
 <h1 style="background-color:powderblue;">Work Order Summary</h1>
 <h3> Summary of Work Order #{{ wo.data[0].WorkOrderID }}</h3>
             <div>

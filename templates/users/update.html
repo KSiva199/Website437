@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="/main_menu">Return to Main Menu</a><br><br>
+<br>
+<a href="/main_menu">Return to Main Menu</a><br>
+<h1 style="background-color:powderblue;">Update Your Account</h1>
             <div style="color:green;">
                 {% if user.errors|length > 0 %}
                     {% for error in user.errors  %}
@@ -44,6 +46,7 @@
                         {% endfor %}
                     </select> <br>
                     <i><span style="color:rgb(185, 9, 6)"><font size="2">Location not pertinent for Technicians</font></span></i><br>
+                    <br>
                     <input type="submit" value="Submit" /> &nbsp &nbsp 
                 </form>
                 

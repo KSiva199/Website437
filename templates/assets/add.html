@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<br>
             <div style="color:red;">
                 {% if obj.errors|length > 0 %}
                     {% for error in obj.errors  %}
@@ -8,7 +9,8 @@
                     {% endfor %}
                 {% endif %}
             </div>
-            <a href="/main_menu">Return to Main Menu</a><br><br>
+            <a href="/main_menu">Return to Main Menu</a><br>
+            <h1 style="background-color:powderblue;">Add an Asset</h1>
             <div>
                 <form method="POST" action="manage_asset?action=new">
                     <b>Parent Asset:</b><br>

@@ -1,15 +1,26 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="'en">
 
-{% block content %}
-            <div style="color:red;">
-                {% if obj.errors|length > 0 %}
-                    {% for error in obj.errors  %}
-                        <div>{{ error }}</div>
-                    {% endfor %}
-                {% endif %}
-            </div>
+<head>
+    <style>
+        body {
+        font-family: arial;
+      }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Home </title>
+</head>
+<body>
+    <p>
+    <div>
+        <img src="Cu.png" width="1900px" height="100px"> 
+    </div>
+    <a href="{{url_for('home')}}" class="btn btn-info btn-lg">Return to Home Page</a>
+    <centre>
 
-            <div>
+    <h1 style="background-color:powderblue;">Clarkson Work Order System</h1>
+    <div> {{ msg }} </div>
                 <form method="POST" action="manage_user?action=new">
                     First Name:<br>
                     <input type="text" name="UserFirstName" required/>
@@ -39,15 +50,10 @@
                     <select name="LocationID" >
                              
                         {% for fo in obj1.fo %}
-                            {% if  obj1.data[0].AssetID == fo.value %}
-                            <option value="" disabled selected >Please Choose</option> 
-                           <option selected="true" value="{{ fo.value }}">{{ fo.text }}</option>
-                            {% else %}
-                             
                             <option value="{{ fo.value }}">{{ fo.text }}</option>
-                            {% endif %}
                         {% endfor %}
-                    </select>
+                    </select><br>
+                    <i><span style="color:rgb(185, 9, 6)"><font size="2">Location not pertinent for Technicians, may be skipped</font></span></i>
             
 
                     <br>
@@ -58,4 +64,7 @@
 
                 </form>
             </div>
-{% endblock %}
+        </p>
+    </style>
+    </body>
+    </html>

@@ -38,14 +38,6 @@ class WO(baseObject):
         for row in self.cur:
             self.data.append(row)
         self.getFKMult()
-    
-    def getAllWOsXX(self):
-        sql = f"Select * from `{self.tn}` ORDER BY `WorkOrderID` DESC" 
-        self.cur.execute(sql)
-        self.data = []
-        for row in self.cur:
-            self.data.append(row)
-        self.getFKMult()
 
     def getFKMult(self):
         newData = self.data

@@ -39,8 +39,8 @@ def register():
     u =Users()
     o.getByField('ParentAsset','BHSnell')
     o.fo=o.dropDownList()
-    print('here')
-    print(o.getByField('ParentAsset','BHSnell'))
+    #print('here')
+    #print(o.getByField('ParentAsset','BHSnell'))
     action = request.args.get('action')
     if action is not None and action=='new':
         return render_template('/users/add.html',obj=u,obj1=o)
@@ -163,7 +163,7 @@ def send_static(path):
 def checkSession():
     if 'active' in session.keys():
         timeSinceAct = time.time() - session['active']
-        print(timeSinceAct)
+        #print(timeSinceAct)
         if timeSinceAct > 500:
             session['msg'] = 'Your session has timed out.'
             return False
@@ -204,7 +204,7 @@ def register_asset():
     if action is not None and action=='update':
         pkval = request.args.get('pkval')
         u.getById(pkval)
-        print(u.data)
+        #print(u.data)
         p.getAll()
         u.UPAsset = p.uParentDDList()
         u.UAType = p.uTypeDDList()
@@ -356,14 +356,14 @@ def manage_WO():
         wo.data[0]['ProblemID'] = request.form.get('ProblemID')
         wo.data[0]['AssetID'] = request.form.get('AssetID')
         wo.data[0]['TechnicianID'] = request.form.get('TechnicianID')
-        print(wo.data[0])
+        #print(wo.data[0])
         if wo.verifyUpdt():
             wo.update()
             if session['user']['Role'] == 'Manager':
                 wo.getAllWOs()
                 return render_template('/wo/listwo_mgr.html',msg= "Work Order Updated.",wo=wo)
         else:
-            return render_template('/wo/manage.html',msg= "User NOT added.",wo=wo)
+            return render_template('/wo/manage.html',msg= "Work Order NOT added.",wo=wo)
     if action is not None and action == 'alter':
         wo.getById(pkval)
         wo.data[0]['Status'] = request.form.get('Status')
@@ -392,7 +392,7 @@ def manage_WO():
     elif pkval == 'new':
         wo.createBlank()
         wo.data[0]['LocationID'] = session['user']['LocationID']
-        print(wo.data)
+        #print(wo.data)
         if session['user']['Role'] == 'Manager':
             return render_template('wo/addwo_mgr.html',wo=wo) 
         else:
@@ -401,7 +401,7 @@ def manage_WO():
     else:
         wo.getById(pkval)
         wo.getWOFKs(pkval)
-        print(wo.data)
+        #print(wo.data)
         if session['user']['Role'] == 'Manager':
             return render_template('wo/manage.html',wo=wo) 
         elif session['user']['Role']=='Technician':
@@ -450,7 +450,7 @@ def list_comms():
 
     if pkval is not None:
         comm.getCommsByWOID(pkval)
-        print(comm.data)
+        #print(comm.data)
         if comm.data:
             return render_template('/wocomms/listcomms.html', comm = comm)
         else:
