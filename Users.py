@@ -70,8 +70,10 @@ class Users(baseObject):
         #print(sql,Username,Password,hpw)
         self.cur.execute(sql,(Username,hpw))
         self.data = []
+        print(self.data)
         for row in self.cur:
             self.data.append(row)
+            
         if len(self.data) == 1:
             return True
         else:
