@@ -36,6 +36,7 @@ class baseObject:
             sql=sql+ '`'+field+'`'+ "varchar(225) NOT NULL,\n"
         sql=sql[:-2]+')'+'ENGINE=MYISAM DEFAULT CHARSET=latin1;'
         self.cur.execute(sql)
+        
     def insert(self,n=0):
         count = 0
         vals = []
@@ -50,6 +51,8 @@ class baseObject:
         #print(sql,vals)
         self.cur.execute(sql,vals)
         self.data[n][self.pk] = self.cur.lastrowid
+
+    
 
     def getById(self,id):
         sql = f"Select * from `{self.tn}` where `{self.pk}` = %s" 
